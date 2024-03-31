@@ -1,4 +1,19 @@
+import moment from 'moment'
+
+const cleanupGitRepoUrl = (gitRepoUrl) => {
+  if (gitRepoUrl.endsWith('.git')) {
+    gitRepoUrl = gitRepoUrl.slice(0, -4)
+  }
+  gitRepoUrl = gitRepoUrl.replace('https://', '')
+  gitRepoUrl = gitRepoUrl.replace('http://', '')
+  if (gitRepoUrl.endsWith('/')) {
+    gitRepoUrl = gitRepoUrl.slice(0, -1)
+  }
+  return gitRepoUrl
+}
+
 const getGitProvideFromGitRepoUrl = (gitRepoUrl) => {
+  gitRepoUrl = cleanupGitRepoUrl(gitRepoUrl)
   if (gitRepoUrl.includes('github')) {
     return 'github'
   } else if (gitRepoUrl.includes('gitlab')) {
@@ -9,6 +24,7 @@ const getGitProvideFromGitRepoUrl = (gitRepoUrl) => {
 }
 
 const getGitRepoOwnerFromGitRepoUrl = (gitRepoUrl) => {
+  gitRepoUrl = cleanupGitRepoUrl(gitRepoUrl)
   const gitRepoUrlParts = gitRepoUrl.split('/')
   if (gitRepoUrlParts.length < 2) {
     return null
@@ -17,6 +33,7 @@ const getGitRepoOwnerFromGitRepoUrl = (gitRepoUrl) => {
 }
 
 const getGitRepoNameFromGitRepoUrl = (gitRepoUrl) => {
+  gitRepoUrl = cleanupGitRepoUrl(gitRepoUrl)
   const gitRepoUrlParts = gitRepoUrl.split('/')
   if (gitRepoUrlParts.length < 2) {
     return null
@@ -55,6 +72,57 @@ const preventSpaceInput = (event) => {
   }
 }
 
+function humanizeMemoryGB(value) {
+  /**
+   * Convert a float value representing gigabytes (GB) to a human-readable format.
+   * If the value is less than 1, it returns the value in megabytes (MB).
+   * Otherwise, it returns the value in gigabytes (GB).
+   */
+  if (value < 1) {
+    const mbValue = value * 1024
+    return `${mbValue.toFixed(2)} MB`
+  } else {
+    return `${value.toFixed(2)} GB`
+  }
+}
+
+function humanizeDiskGB(value) {
+  /**
+   * Convert a float value representing gigabytes (GB) to a human-readable format.
+   * If the value is less than 1, it returns the value in megabytes (MB).
+   * Otherwise, it returns the value in gigabytes (GB).
+   */
+  if (value < 1) {
+    const mbValue = value * 1024
+    return `${mbValue.toFixed(2)} MB`
+  } else {
+    return `${value.toFixed(2)} GB`
+  }
+}
+
+function humanizeNetworkSpeed(kbps) {
+  /**
+   * Convert a float value representing network speed in kilobits per second (kbps)
+   * to a human-readable format (kbps, Mbps, or Gbps).
+   */
+  if (kbps < 1000) {
+    return `${kbps.toFixed(2)} kbps`
+  } else if (kbps < 1000000) {
+    const mbps = kbps / 1000
+    return `${mbps.toFixed(2)} Mbps`
+  } else {
+    const gbps = kbps / 1000000
+    return `${gbps.toFixed(2)} Gbps`
+  }
+}
+
+function formatTimestampHumannize(timestamp) {
+  /**
+   * Convert a timestamp to a human-readable date and time string.
+   */
+  return moment(new Date(timestamp)).format('Do MMMM YYYY - h:mm:ss a')
+}
+
 export {
   getGitProvideFromGitRepoUrl,
   getGitRepoOwnerFromGitRepoUrl,
@@ -62,5 +130,9 @@ export {
   getGraphQlHttpBaseUrl,
   getGraphQlWsBaseUrl,
   getHttpBaseUrl,
-  preventSpaceInput
+  preventSpaceInput,
+  humanizeMemoryGB,
+  humanizeNetworkSpeed,
+  humanizeDiskGB,
+  formatTimestampHumannize
 }

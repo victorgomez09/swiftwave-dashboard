@@ -8,23 +8,35 @@ import { ApolloClient, ApolloLink, createHttpLink, InMemoryCache, split } from '
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import {
+  faAngleDown,
+  faAngleUp,
   faArrowDown,
   faArrowRight,
+  faArrowRotateRight,
+  faArrowsRotate,
   faArrowUpRightFromSquare,
+  faBook,
   faBox,
   faCalendarDays,
+  faChartColumn,
+  faChartSimple,
   faChevronDown,
+  faChevronRight,
   faCircleCheck,
   faCircleDown,
   faCircleStop,
   faCircleXmark,
+  faClipboard,
   faCloud,
   faCodeBranch,
   faCopy,
   faCubesStacked,
+  faDiagramProject,
+  faEllipsisVertical,
   faEye,
   faEyeSlash,
   faFile,
+  faFileLines,
   faFingerprint,
   faGear,
   faGlobe,
@@ -33,6 +45,7 @@ import {
   faKey,
   faLink,
   faListCheck,
+  faListUl,
   faLocationArrow,
   faMagnifyingGlass,
   faMoon,
@@ -42,17 +55,24 @@ import {
   faRightFromBracket,
   faRocket,
   faRotateRight,
+  faRoute,
+  faServer,
   faSkullCrossbones,
+  faSpinner,
   faStore,
+  faTerminal,
   faTrash,
   faTriangleExclamation,
   faUpload,
   faUsers,
+  faVault,
+  faWrench,
   faXmark
 } from '@fortawesome/free-solid-svg-icons'
 
 import { useAuthStore } from '@/store/auth.js'
 import Toast from 'vue-toastification'
+import VueApexCharts from 'vue3-apexcharts'
 
 import App from './App.vue'
 import router from './router'
@@ -78,6 +98,8 @@ library.add(
   faUsers,
   faRightFromBracket,
   faChevronDown,
+  faChevronRight,
+  faVault,
   faArrowRight,
   faUpload,
   faDocker,
@@ -109,7 +131,24 @@ library.add(
   faStore,
   faMagnifyingGlass,
   faGlobe,
-  faRocket
+  faRocket,
+  faWrench,
+  faRoute,
+  faServer,
+  faListUl,
+  faEllipsisVertical,
+  faChartColumn,
+  faTerminal,
+  faBook,
+  faArrowsRotate,
+  faClipboard,
+  faArrowRotateRight,
+  faFileLines,
+  faDiagramProject,
+  faAngleDown,
+  faAngleUp,
+  faChartSimple,
+  faSpinner
 )
 
 // Environment variables
@@ -201,6 +240,7 @@ app.use(Toast, {
   icon: true,
   rtl: false
 })
+app.use(VueApexCharts)
 app.directive('debounce', vueDebounce({ lock: true }))
 app.mount('#app')
 
