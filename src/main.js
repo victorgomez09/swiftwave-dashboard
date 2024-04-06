@@ -15,6 +15,7 @@ import {
   faArrowRotateRight,
   faArrowsRotate,
   faArrowUpRightFromSquare,
+  faBed,
   faBook,
   faBox,
   faCalendarDays,
@@ -37,6 +38,7 @@ import {
   faEyeSlash,
   faFile,
   faFileLines,
+  faFileWaveform,
   faFingerprint,
   faGear,
   faGlobe,
@@ -48,7 +50,6 @@ import {
   faListUl,
   faLocationArrow,
   faMagnifyingGlass,
-  faMoon,
   faNetworkWired,
   faPlay,
   faPlus,
@@ -57,6 +58,7 @@ import {
   faRotateRight,
   faRoute,
   faServer,
+  faSignal,
   faSkullCrossbones,
   faSpinner,
   faStop,
@@ -125,7 +127,6 @@ library.add(
   faCircleDown,
   faRotateRight,
   faFile,
-  faMoon,
   faPlay,
   faCircleStop,
   faCubesStacked,
@@ -150,7 +151,10 @@ library.add(
   faAngleUp,
   faChartSimple,
   faSpinner,
-  faStop
+  faStop,
+  faFileWaveform,
+  faBed,
+  faSignal
 )
 
 // Environment variables

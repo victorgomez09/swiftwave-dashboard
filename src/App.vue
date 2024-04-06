@@ -26,7 +26,7 @@ onMounted(() => {
   <LoadingPage :show="authStore.IsLoggingInProgress" />
   <div class="app">
     <SideBar class="w-80" />
-    <div class="flex max-h-[100vh] w-full flex-col items-center overflow-y-auto p-6">
+    <div class="scrollbox flex max-h-[100vh] w-full flex-col items-center overflow-y-auto p-4">
       <RouterView />
     </div>
   </div>
@@ -51,6 +51,19 @@ onMounted(() => {
 }
 
 .scrollbox::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-primary-500;
+}
+
+.xterm-viewport::-webkit-scrollbar {
+  width: 9px !important;
+  height: 9px !important;
+}
+
+.xterm-viewport::-webkit-scrollbar-track {
+  @apply rounded-full bg-gray-200;
+}
+
+.xterm-viewport::-webkit-scrollbar-thumb {
   @apply rounded-full bg-primary-500;
 }
 </style>

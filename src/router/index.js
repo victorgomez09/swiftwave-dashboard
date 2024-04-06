@@ -65,6 +65,11 @@ const router = createRouter({
           component: () => import('@/views/pages/ApplicationDetails/DeploymentList.vue')
         },
         {
+          path: 'deployment/:deployment_id',
+          name: 'Application Deployment Details',
+          component: () => import('@/views/pages/ApplicationDetails/DeploymentDetails.vue')
+        },
+        {
           path: 'runtime_logs',
           name: 'Application Details Runtime Logs',
           component: () => import('@/views/pages/ApplicationDetails/RuntimeLogs.vue')
@@ -97,19 +102,24 @@ const router = createRouter({
         {
           path: 'danger_zone',
           name: 'Application Details Danger Zone',
-          component: () => import('@/views/pages/ApplicationDetails/DangerZone.vue')
+          component: () => import('@/views/pages/ApplicationDetails/Destroy.vue')
+        },
+        {
+          path: 'manage',
+          name: 'Application Details Manage',
+          component: () => import('@/views/pages/ApplicationDetails/Manage.vue')
         },
         {
           path: 'webhook_ci',
           name: 'Application Details Webhook CI',
           component: () => import('@/views/pages/ApplicationDetails/WebhookCI.vue')
+        },
+        {
+          path: 'resource_stats',
+          name: 'Application Details Resource Stats',
+          component: () => import('@/views/pages/ApplicationDetails/ResourceStats.vue')
         }
       ]
-    },
-    {
-      path: '/deployment/:id',
-      name: 'Deployment Details',
-      component: () => import('@/views/pages/DeploymentDetails.vue')
     },
     {
       path: '/persistent-volumes',
@@ -165,6 +175,11 @@ const router = createRouter({
       path: '/server/analytics',
       name: 'Server Analytics',
       component: () => import('@/views/pages/ServerAnalytics.vue')
+    },
+    {
+      path: '/logs',
+      name: 'System Logs',
+      component: () => import('@/views/pages/SystemLogs.vue')
     }
   ]
 })

@@ -10,6 +10,7 @@ import NewApplicationUpdaterStore from '@/store/applicationUpdater.js'
 import FilledButton from '@/views/components/FilledButton.vue'
 import { useToast } from 'vue-toastification'
 import { isNaN } from 'lodash'
+import UptimeChart from '@/views/components/UptimeChart.vue'
 
 // Toast
 const toast = useToast()
@@ -73,11 +74,12 @@ const applicationDetails = computed(() => applicationDetailsRaw.value?.applicati
 const realtimeInfo = computed(() => applicationDetailsRaw.value?.application?.realtimeInfo ?? {})
 const realtimeReplicaCountPercentage = computed(() => {
   try {
-    return (realtimeInfo.value.RunningReplicas / realtimeInfo.value.DesiredReplicas) * 100
+    return (realtimeInfo.value.RunningReplicas / applicationDetails.value.replicas) * 100
   } catch (e) {
     return 0
   }
 })
+const deploymentMode = computed(() => applicationDetails.value?.deploymentMode ?? '')
 
 const isIngressRulesAvailable = computed(() => {
   return (applicationDetails.value?.ingressRules ?? []).length > 0
@@ -199,19 +201,17 @@ onWakeApplicationError((error) => {
           <p v-if="applicationDetails.latestDeployment.upstreamType === 'sourceCode'">Source-code uploaded manually</p>
         </div>
         <div class="mt-2 flex items-center gap-2 font-normal text-gray-800">
-          <font-awesome-icon icon="fa-solid fa-gear" />
-          <p v-if="applicationDetails.deploymentMode === 'global'">Global Deployment</p>
-          <p v-else-if="applicationDetails.deploymentMode === 'replicated'">
-            Replicated Deployment (expected {{ applicationDetails.replicas }} instance of the application)
-          </p>
-        </div>
-        <div class="mt-2 flex items-center gap-2 font-normal text-gray-800">
           <font-awesome-icon icon="fa-solid fa-globe" />
           <p v-if="isIngressRulesAvailable" class="max-w-[40vw]">
             <span v-for="(ingressRule, index) in applicationDetails.ingressRules" :key="index">
               <span v-if="index !== 0">, </span>
-              <span
-                >{{ ingressRule.protocol }}://{{ ingressRule.domain?.name ?? 'server_ip' }}:{{ ingressRule.port }}</span
+              <a
+                :href="
+                  ingressRule.protocol + '://' + ingressRule.domain?.name ??
+                  'server_ip' + ':' + ingressRule.port.toString()
+                "
+                target="_blank"
+                >{{ ingressRule.protocol }}://{{ ingressRule.domain?.name ?? 'server_ip' }}:{{ ingressRule.port }}</a
               >
             </span>
           </p>
@@ -234,26 +234,21 @@ onWakeApplicationError((error) => {
       </div>
       <!--   right side   -->
       <div class="flex flex-col items-end">
-        <p class="w-full text-center text-xl font-medium">Realtime Info</p>
-        <div class="mt-2 flex items-center gap-2 font-medium text-gray-800">
-          <p v-if="applicationDetails.isSleeping" class="font-semibold text-blue-600">
-            <font-awesome-icon icon="fa-solid fa-moon" />
+        <div class="mt-2 flex w-full items-center gap-2 text-center font-medium text-gray-800">
+          <p v-if="applicationDetails.isSleeping" class="my-2 w-full text-center font-semibold text-blue-600">
+            <font-awesome-icon icon="fa-solid fa-bed" />
             Sleeping
           </p>
-          <p v-else-if="realtimeInfo.InfoFound" class="text-center">
-            Active {{ realtimeInfo.RunningReplicas }} instance(s)
-            <br />
-            <span
-              :class="{
-                'text-success-600': realtimeReplicaCountPercentage >= 100,
-                'text-warning-600': realtimeReplicaCountPercentage < 100 && realtimeReplicaCountPercentage > 0,
-                'text-danger-600': realtimeReplicaCountPercentage === 0
-              }"
-              class="font-bold"
-              v-if="!isNaN(realtimeReplicaCountPercentage)"
-              >[{{ realtimeReplicaCountPercentage }}%]</span
-            >
-          </p>
+          <div v-else-if="realtimeInfo.InfoFound" class="flex w-full flex-col items-center text-center">
+            <UptimeChart
+              v-if="!isNaN(realtimeReplicaCountPercentage) && deploymentMode === 'replicated'"
+              :percentage="realtimeReplicaCountPercentage"
+              :label="`(${realtimeInfo.RunningReplicas ?? 0} / ${applicationDetails.replicas})`" />
+            <p v-else-if="deploymentMode === 'global'" class="w-full text-center font-semibold text-secondary-600">
+              {{ realtimeInfo.RunningReplicas ?? 0 }} Instances
+            </p>
+            <p v-else class="text-warning-600">Not Available</p>
+          </div>
           <p v-else class="text-warning-600">
             <font-awesome-icon icon="fa-solid fa-triangle-exclamation" />&nbsp;&nbsp;Not Available
           </p>
@@ -282,32 +277,32 @@ onWakeApplicationError((error) => {
         </div>
       </div>
     </div>
+    <div class="mt-8 flex w-full flex-row gap-5">
+      <!--  Vertical navbar for links    -->
+      <ApplicationDetailsNavbar />
 
-    <hr class="mt-2" />
-
-    <!--  Horizontal navbar for links    -->
-    <ApplicationDetailsNavbar class="mb-4 mt-4" />
-
-    <!--  Nested Router View  -->
-    <RouterView />
-
-    <!--  Update Config Notify bar  -->
-    <div
-      v-if="applicationUpdater.isConfigurationUpdated"
-      class="mt-4 flex flex-row items-center justify-end gap-2 rounded-md border border-gray-300 p-2">
-      <span class="mr-4 font-medium">You have updated some of the configuration</span>
-      <FilledButton
-        :click="applicationUpdater.applyConfigurationChanges"
-        :loading="applicationUpdater.isDeployRequestSubmitting"
-        type="primary">
-        Apply Changes
-      </FilledButton>
-      <FilledButton
-        :click="applicationUpdater.cancelConfigurationChanges"
-        :disabled="applicationUpdater.isDeployRequestSubmitting"
-        type="secondary">
-        Cancel
-      </FilledButton>
+      <div class="w-full">
+        <!--  Nested Router View  -->
+        <RouterView />
+        <!--  Update Config Notify bar  -->
+        <div
+          v-if="applicationUpdater.isConfigurationUpdated"
+          class="mt-4 flex flex-row items-center justify-end gap-2 rounded-md border border-gray-300 p-2">
+          <span class="mr-4 font-medium">You have updated some of the configuration</span>
+          <FilledButton
+            :click="applicationUpdater.applyConfigurationChanges"
+            :loading="applicationUpdater.isDeployRequestSubmitting"
+            type="primary">
+            Apply Changes
+          </FilledButton>
+          <FilledButton
+            :click="applicationUpdater.cancelConfigurationChanges"
+            :disabled="applicationUpdater.isDeployRequestSubmitting"
+            type="secondary">
+            Cancel
+          </FilledButton>
+        </div>
+      </div>
     </div>
   </section>
 </template>
