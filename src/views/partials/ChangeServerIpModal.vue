@@ -71,6 +71,7 @@ const startCountDown = () => {
     timeCount.value--
     if (timeCount.value === 0) {
       clearInterval(interval)
+      ipChanged.value = false
       router.push({ name: 'Maintenance', query: { redirect: router.currentRoute.value.path } })
     }
   }, 1000)

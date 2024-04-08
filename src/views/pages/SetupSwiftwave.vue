@@ -121,6 +121,7 @@ const startCountDown = () => {
     timeCount.value--
     if (timeCount.value === 0) {
       clearInterval(interval)
+      setupSuccessful.value = false
       router.push({ name: 'Maintenance' })
     }
   }, 1000)

@@ -5,9 +5,14 @@ import Logo from '@/assets/images/logo-full-inverse-subtitle.png'
 import ChangePasswordModal from '@/views/partials/ChangePasswordModal.vue'
 import { computed, onMounted, ref } from 'vue'
 import SideBarOption from '@/views/partials/SideBarOption.vue'
+import { useMutation } from '@vue/apollo-composable'
+import gql from 'graphql-tag'
+import { useToast } from 'vue-toastification'
+import ModalDialog from '@/views/components/ModalDialog.vue'
 
 const authStore = useAuthStore()
 const router = useRouter()
+const toast = useToast()
 
 const isChangePasswordModalOpen = ref(false)
 const swVersion = ref('')
@@ -38,6 +43,51 @@ onMounted(() => {
     })
   }
 })
+
+// Restart system
+const timeCount = ref(5)
+
+const isSystemRestartModalOpen = ref(false)
+const {
+  mutate: restartSystem,
+  onDone: onRestartSystemDone,
+  onError: onRestartSystemError
+} = useMutation(gql`
+  mutation {
+    restartSystem
+  }
+`)
+
+onRestartSystemError((error) => {
+  toast.error(error.message)
+})
+
+onRestartSystemDone((val) => {
+  if (val.data.restartSystem) {
+    toast.success('System restart requested')
+    isSystemRestartModalOpen.value = true
+    startCountDown()
+  } else {
+    toast.error('System restart failed')
+  }
+})
+
+const systemRestart = () => {
+  if (confirm('Are you sure you want to restart swiftwave ?\nYour deployed applications will not face any downtime.')) {
+    restartSystem()
+  }
+}
+
+const startCountDown = () => {
+  const interval = setInterval(() => {
+    timeCount.value--
+    if (timeCount.value === 0) {
+      clearInterval(interval)
+      isSystemRestartModalOpen.value = false
+      router.push({ name: 'Maintenance', query: { redirect: router.currentRoute.value.path } })
+    }
+  }, 1000)
+}
 </script>
 
 <template>
@@ -159,7 +209,7 @@ onMounted(() => {
           <template #icon>
             <font-awesome-icon icon="fa-solid fa-server" />
           </template>
-          <template #title>Server Management</template>
+          <template #title>Mange Servers</template>
           <template #content>
             <div class="space-y-2">
               <RouterLink
@@ -172,19 +222,13 @@ onMounted(() => {
           </template>
         </SideBarOption>
 
-        <SideBarOption :active-urls="['Users']">
+        <SideBarOption :active-urls="['System Logs']">
           <template #icon>
             <font-awesome-icon icon="fa-solid fa-gear" />
           </template>
-          <template #title> Administration</template>
+          <template #title> Manage System</template>
           <template #content>
             <div class="space-y-2">
-              <RouterLink
-                class="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-                to="/users">
-                <font-awesome-icon icon="fa-solid fa-users" />
-                <span class="mx-2 text-sm font-medium">Manage Users</span>
-              </RouterLink>
               <RouterLink
                 class="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
                 to="/logs">
@@ -196,6 +240,29 @@ onMounted(() => {
                 to="/setup?update=1">
                 <font-awesome-icon icon="fa-solid fa-wrench" />
                 <span class="mx-2 text-sm font-medium">System Configuration</span>
+              </RouterLink>
+              <div
+                @click="systemRestart"
+                class="flex transform cursor-pointer items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700">
+                <font-awesome-icon icon="fa-solid fa-power-off" />
+                <span class="mx-2 text-sm font-medium">System Restart</span>
+              </div>
+            </div>
+          </template>
+        </SideBarOption>
+
+        <SideBarOption :active-urls="['Users']">
+          <template #icon>
+            <font-awesome-icon icon="fa-solid fa-user-tie" />
+          </template>
+          <template #title> Administration</template>
+          <template #content>
+            <div class="space-y-2">
+              <RouterLink
+                class="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                to="/users">
+                <font-awesome-icon icon="fa-solid fa-users" />
+                <span class="mx-2 text-sm font-medium">Manage Users</span>
               </RouterLink>
               <div
                 class="flex transform cursor-pointer items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
@@ -219,6 +286,20 @@ onMounted(() => {
       <span> v{{ swVersion }}</span>
     </div>
     <ChangePasswordModal :is-modal-open="isChangePasswordModalOpen" :close-modal="closeChangePasswordModal" />
+    <Teleport to="body">
+      <!-- Modal for restart system -->
+      <ModalDialog :is-open="isSystemRestartModalOpen" non-cancelable>
+        <template v-slot:header>
+          <span>🔌 Restarting System</span>
+        </template>
+        <template v-slot:body>
+          <p class="mb-2">System restart has been requested.</p>
+          <p>
+            Redirecting to Maintenance Page in <b>{{ timeCount }}</b> seconds
+          </p>
+        </template>
+      </ModalDialog>
+    </Teleport>
   </aside>
 </template>
 

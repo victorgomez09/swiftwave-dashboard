@@ -55,6 +55,7 @@ import {
   faNetworkWired,
   faPlay,
   faPlus,
+  faPowerOff,
   faRightFromBracket,
   faRocket,
   faRotateRight,
@@ -70,6 +71,7 @@ import {
   faTriangleExclamation,
   faUpload,
   faUsers,
+  faUserTie,
   faVault,
   faWrench,
   faXmark
@@ -158,7 +160,9 @@ library.add(
   faBed,
   faSignal,
   faCaretDown,
-  faCheck
+  faCheck,
+  faPowerOff,
+  faUserTie
 )
 
 // Environment variables
