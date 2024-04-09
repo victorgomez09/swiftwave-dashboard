@@ -53,7 +53,8 @@ const newApplicationState = reactive({
   dockerImage: '',
   sourceCodeCompressedFileName: '',
   capabilities: [],
-  sysctls: []
+  sysctls: [],
+  group: ''
 })
 
 // Deploy application
