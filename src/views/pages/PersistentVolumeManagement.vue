@@ -44,7 +44,11 @@ const {
 )
 
 const deletePersistentVolumeWithConfirmation = (persistent_volume) => {
-  if (confirm('Are you sure you want to delete this persistent volume?')) {
+  if (
+    confirm(
+      'Are you sure you want to delete this persistent volume?\n[NOTE] If you have deleted volume bindings just a few seconds ago, please wait at-least a minute before deleting the persistent volume.'
+    )
+  ) {
     deletePersistentVolume({
       id: persistent_volume.id
     })
@@ -52,7 +56,9 @@ const deletePersistentVolumeWithConfirmation = (persistent_volume) => {
 }
 
 onDomainDeleteSuccess(() => {
-  toast.success('Persistent volume deleted successfully')
+  toast.success(
+    'Persistent volume deletion requested. If all conditions are met, the persistent volume will be deleted in the background.'
+  )
   refetchPersistentVolumes()
 })
 
