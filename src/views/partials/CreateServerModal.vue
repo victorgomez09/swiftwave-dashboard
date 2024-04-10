@@ -35,7 +35,8 @@ const closeModal = () => {
 // Register Server state
 const newServerDetails = reactive({
   ip: '',
-  user: 'root'
+  user: 'root',
+  ssh_port: 22
 })
 
 const {
@@ -48,6 +49,7 @@ const {
     mutation ($input: NewServerInput!) {
       createServer(input: $input) {
         ip
+        ssh_port
         user
       }
     }
@@ -63,6 +65,7 @@ onServerRegisterSuccess(() => {
   closeModal()
   newServerDetails.ip = ''
   newServerDetails.user = 'root'
+  newServerDetails.ssh_port = 22
   toast.success('Server registered successfully\nProceed for server setup')
   props.callbackOnCreate()
 })
@@ -91,6 +94,20 @@ defineExpose({
               <input
                 id="ip"
                 v-model="newServerDetails.ip"
+                @keydown="preventSpaceInput"
+                autocomplete="off"
+                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+                placeholder=""
+                type="text" />
+            </div>
+          </div>
+          <!--  SSH Port Field   -->
+          <div class="mt-4">
+            <label class="block text-sm font-medium text-gray-700" for="ssh_port"> SSH Port </label>
+            <div class="mt-1">
+              <input
+                id="ssh_port"
+                v-model="newServerDetails.ssh_port"
                 @keydown="preventSpaceInput"
                 autocomplete="off"
                 class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"

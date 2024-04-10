@@ -27,6 +27,7 @@ const {
         ip
         hostname
         user
+        ssh_port
         swarmMode
         scheduleDeployments
         dockerUnixSocketPath
@@ -38,7 +39,7 @@ const {
   `,
   null,
   {
-    pollInterval: 60000
+    pollInterval: 10000
   }
 )
 
@@ -79,6 +80,7 @@ const openCreateServerModal = () => {
     <Table class="mt-8">
       <template v-slot:header>
         <TableHeader align="left">Server</TableHeader>
+        <TableHeader align="center">SSH Port</TableHeader>
         <TableHeader align="center">User</TableHeader>
         <TableHeader align="center">Swarm Mode</TableHeader>
         <TableHeader align="center">Deployment</TableHeader>

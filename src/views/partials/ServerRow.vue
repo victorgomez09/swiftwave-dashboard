@@ -12,6 +12,7 @@ import gql from 'graphql-tag'
 import { useToast } from 'vue-toastification'
 import SetupResourceMonitoring from '@/views/partials/SetupResourceMonitoring.vue'
 import ChangeServerIpModal from '@/views/partials/ChangeServerIpModal.vue'
+import ChangeServerSshPortModal from '@/views/partials/ChangeServerSshPortModal.vue'
 
 const props = defineProps({
   server: {
@@ -33,6 +34,7 @@ const setupModalRef = ref(null)
 const enableProxyModalRef = ref(null)
 const setupResourceMonitoringModalRef = ref(null)
 const changeServerIpModalRef = ref(null)
+const changeServerSSHPortModalRef = ref(null)
 const onClickActions = () => {
   if (actionsBtnRef.value === null || actionsBtnRef.value.$el === null) {
     return
@@ -285,6 +287,13 @@ const changeServerIp = () => {
   }
 }
 
+// Change server SSH port
+const changeServerSSHPort = () => {
+  if (changeServerSSHPortModalRef.value) {
+    changeServerSSHPortModalRef.value.openModal()
+  }
+}
+
 // Delete server
 const {
   mutate: deleteServer,
@@ -331,12 +340,19 @@ onDeleteServerDone((val) => {
     :key="server.id + '_setup_resource_monitoring_modal'"
     :open-web-console="openWebConsole" />
   <ChangeServerIpModal :server-ip="server.ip" :server-id="server.id" ref="changeServerIpModalRef" />
+  <ChangeServerSshPortModal
+    :server-ssh-port="server.ssh_port"
+    :server-id="server.id"
+    ref="changeServerSSHPortModalRef" />
   <tr :key="server.id + '_server_row'">
     <TableRow align="left">
       <div class="flex flex-col text-sm font-medium text-gray-900">
         {{ server.ip }}
         <span class="text-xs text-gray-700">{{ server.hostname }}</span>
       </div>
+    </TableRow>
+    <TableRow align="center">
+      {{ server.ssh_port }}
     </TableRow>
     <TableRow align="center">
       {{ server.user }}
@@ -411,6 +427,9 @@ onDeleteServerDone((val) => {
         <font-awesome-icon icon="fa-solid fa-play" />&nbsp;&nbsp;&nbsp;Enable Deployment on Server
       </li>
       <li @click="changeServerIp"><font-awesome-icon icon="fa-solid fa-globe" />&nbsp;&nbsp;&nbsp;Change Server IP</li>
+      <li @click="changeServerSSHPort">
+        <font-awesome-icon icon="fa-solid fa-globe" />&nbsp;&nbsp;&nbsp;Change Server SSH Port
+      </li>
       <li @click="deleteServer">
         <p class="font-medium text-danger-500">
           <font-awesome-icon icon="fa-solid fa-trash" />&nbsp;&nbsp;&nbsp;Delete Server
