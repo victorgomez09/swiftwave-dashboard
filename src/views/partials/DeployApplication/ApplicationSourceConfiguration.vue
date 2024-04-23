@@ -10,12 +10,7 @@ import FilledButton from '@/views/components/FilledButton.vue'
 import { generateTarBlob } from '@/vendor/tarts.js'
 import DockerfileEditor from '@/views/partials/DeployApplication/DockerfileEditor.vue'
 import BuildArgInput from '@/views/partials/BuildArgInput.vue'
-import {
-  getGitProvideFromGitRepoUrl,
-  getGitRepoNameFromGitRepoUrl,
-  getGitRepoOwnerFromGitRepoUrl,
-  getHttpBaseUrl
-} from '@/vendor/utils.js'
+import { getHttpBaseUrl } from '@/vendor/utils.js'
 import CreateImageRegistryCredentialModal from '@/views/partials/CreateImageRegistryCredentialModal.vue'
 import CreateGitCredentialModal from '@/views/partials/CreateGitCredentialModal.vue'
 
@@ -107,6 +102,7 @@ const {
       gitCredentials {
         id
         name
+        type
       }
     }
   `,
@@ -145,9 +141,6 @@ const fetchGitBranches = () => {
     return
   }
   let gitRepoUrl = stateRef.gitRepoUrl.trim()
-  if (gitRepoUrl.includes('https://') === false && gitRepoUrl.includes('http://') === false) {
-    gitRepoUrl = 'https://' + gitRepoUrl
-  }
   fetchGitBranchesVariables.value = {
     input: {
       gitCredentialId: stateRef.gitCredentialID,
@@ -283,10 +276,8 @@ const generateConfiguration = () => {
     generateConfigurationVariables.value.input = {
       sourceType: props.applicationSourceType,
       gitCredentialID: gitCredentialID === 0 ? null : gitCredentialID,
-      gitProvider: getGitProvideFromGitRepoUrl(stateRef.gitRepoUrl),
+      repositoryUrl: stateRef.gitRepoUrl === '' ? null : stateRef.gitRepoUrl,
       repositoryBranch: stateRef.gitBranch === '' ? null : stateRef.gitBranch,
-      repositoryName: getGitRepoNameFromGitRepoUrl(stateRef.gitRepoUrl),
-      repositoryOwner: getGitRepoOwnerFromGitRepoUrl(stateRef.gitRepoUrl),
       codePath: stateRef.codePath,
       customDockerFile: '',
       sourceCodeCompressedFileName: stateRef.sourceCodeFile === '' ? null : stateRef.sourceCodeFile
@@ -301,10 +292,8 @@ const generateConfigurationForCustomDockerFile = (customDockerFile) => {
   generateConfigurationVariables.value.input = {
     sourceType: 'custom',
     gitCredentialID: null,
-    gitProvider: null,
     repositoryBranch: null,
-    repositoryName: null,
-    repositoryOwner: null,
+    repositoryUrl: null,
     customDockerFile: customDockerFile,
     sourceCodeCompressedFileName: null
   }
@@ -350,7 +339,7 @@ const openCreateImageRegistryCredentialModal = computed(
               class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
               <option selected value="0">No Credential</option>
               <option v-for="credential in gitCredentials" :key="credential.id" :value="credential.id">
-                {{ credential.name }}
+                {{ credential.name }} [{{ credential.type }}]
               </option>
             </select>
           </div>
@@ -377,7 +366,6 @@ const openCreateImageRegistryCredentialModal = computed(
               placeholder="Enter Git Repository URL"
               type="text"
               v-debounce:1000ms="fetchGitBranches" />
-            <p class="mt-1 text-xs text-gray-800">* Only GitHub & GitLab supported</p>
           </div>
         </div>
 

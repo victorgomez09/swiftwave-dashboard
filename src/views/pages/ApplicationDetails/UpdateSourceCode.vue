@@ -99,9 +99,6 @@ const fetchGitBranches = () => {
     return
   }
   let gitRepoUrl = stateRef.gitRepoUrl.trim()
-  if (gitRepoUrl.includes('https://') === false && gitRepoUrl.includes('http://') === false) {
-    gitRepoUrl = 'https://' + gitRepoUrl
-  }
   fetchGitBranchesVariables.value = {
     input: {
       gitCredentialId: stateRef.gitCredentialID,
@@ -129,12 +126,7 @@ function prefillDetails() {
   if (applicationExistingDetailsResult.value && applicationExistingDetailsResult.value.application) {
     stateRef.command = applicationExistingDetailsResult.value.application.command
     if (applicationExistingDetailsResult.value.application.latestDeployment.upstreamType === 'git') {
-      stateRef.gitRepoUrl =
-        applicationExistingDetailsResult.value.application.latestDeployment.gitProvider +
-        '.com/' +
-        applicationExistingDetailsResult.value.application.latestDeployment.repositoryOwner +
-        '/' +
-        applicationExistingDetailsResult.value.application.latestDeployment.repositoryName
+      stateRef.gitRepoUrl = applicationExistingDetailsResult.value.application.latestDeployment.repositoryUrl
       stateRef.gitBranch = applicationExistingDetailsResult.value.application.latestDeployment.repositoryBranch
       stateRef.gitCredentialID = applicationExistingDetailsResult.value.application.latestDeployment.gitCredentialID
       stateRef.codePath = applicationExistingDetailsResult.value.application.latestDeployment.codePath
@@ -224,6 +216,7 @@ const {
       gitCredentials {
         id
         name
+        type
       }
     }
   `,
@@ -415,7 +408,7 @@ const openCreateImageRegistryCredentialModal = computed(
               class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
               <option selected value="0">No Credential</option>
               <option v-for="credential in gitCredentials" :key="credential.id" :value="credential.id">
-                {{ credential.name }}
+                {{ credential.name }} [{{ credential.type }}]
               </option>
             </select>
           </div>
@@ -440,8 +433,6 @@ const openCreateImageRegistryCredentialModal = computed(
               name="name"
               placeholder="Enter Git Repository URL"
               type="text" />
-
-            <p class="mt-1 text-xs text-gray-800">* Only GitHub & GitLab supported</p>
           </div>
         </div>
 
