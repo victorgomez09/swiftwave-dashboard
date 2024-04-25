@@ -88,6 +88,7 @@ const applicationSpecificIngressRulesQuery = gql`
         application {
           name
         }
+        targetType
         targetPort
       }
     }
