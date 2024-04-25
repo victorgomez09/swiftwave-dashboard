@@ -1,4 +1,6 @@
 <script setup>
+import { computed } from 'vue'
+
 const props = defineProps({
   percentage: {
     type: Number,
@@ -10,9 +12,9 @@ const props = defineProps({
   }
 })
 
-const percentage = Math.min(props.percentage, 100)
-const noOfGreenLines = Math.floor(percentage / 10)
-const noOfRedLines = 10 - noOfGreenLines
+const percentage = computed(() => Math.min(props.percentage, 100))
+const noOfGreenLines = computed(() => Math.floor(percentage.value / 10))
+const noOfRedLines = computed(() => 10 - noOfGreenLines.value)
 </script>
 
 <template>
