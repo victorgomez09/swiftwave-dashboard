@@ -64,7 +64,7 @@ const setSourceType = (type) => {
 
 <style scoped>
 .optionButton {
-  @apply flex aspect-square h-fit cursor-pointer flex-col items-center justify-center rounded-md border-2 border-gray-400 p-8 hover:text-blue-700 hover:shadow-xl;
+  @apply flex aspect-square h-fit cursor-pointer flex-col items-center justify-center rounded-md border-2 border-gray-400 p-8 hover:text-blue-700 hover:shadow-lg;
 }
 
 .optionButton p {
@@ -76,7 +76,7 @@ const setSourceType = (type) => {
 }
 
 .optionButtonSelected {
-  @apply border-4 border-primary-500;
+  @apply border-primary-500;
 }
 
 .optionButtonSelected p {
