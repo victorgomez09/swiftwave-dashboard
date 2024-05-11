@@ -115,7 +115,10 @@ onMounted(() => {
         :small="true"
         :hide-hover="true" />
     </TableRow>
-    <TableRow align="center" class="text-sm text-gray-700">{{ applications.length }} apps</TableRow>
+    <TableRow align="center" class="text-sm text-gray-700">
+      <font-awesome-icon icon="fa-solid fa-layer-group" class="mr-1" />
+      {{ applications.length }} applications
+    </TableRow>
     <TableRow align="center">-</TableRow>
     <TableRow align="right" flex>
       <FilledButton slim type="primary" v-if="isExpanded" :click="hideApplicationList">Hide Apps</FilledButton>

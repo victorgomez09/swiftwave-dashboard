@@ -50,6 +50,7 @@ import {
   faHandshakeAngle,
   faHardDrive,
   faKey,
+  faLayerGroup,
   faLink,
   faListCheck,
   faListUl,
@@ -171,7 +172,8 @@ library.add(
   faBug,
   faHandshakeAngle,
   faEnvelope,
-  faPeopleGroup
+  faPeopleGroup,
+  faLayerGroup
 )
 
 // Environment variables
