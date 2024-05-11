@@ -13,6 +13,11 @@ const props = defineProps({
   gitCredentialId: {
     type: Number,
     required: true
+  },
+  callbackOnPop: {
+    type: Function,
+    required: false,
+    default: () => {}
   }
 })
 
@@ -111,6 +116,7 @@ onGitCredentialUpdateError((err) => {
 onGitCredentialUpdateSuccess(() => {
   closeModal()
   toast.success('Git Credential updated successfully')
+  props.callbackOnPop()
 })
 </script>
 

@@ -104,8 +104,9 @@ onImageRegistryCredentialListError((err) => {
     <Table class="mt-8">
       <template v-slot:header>
         <TableHeader align="left">URL</TableHeader>
-        <TableHeader align="left">Username</TableHeader>
-        <TableHeader align="left">Password</TableHeader>
+        <TableHeader align="center">Username</TableHeader>
+        <TableHeader align="center">Password</TableHeader>
+        <TableHeader align="center">Edit Details</TableHeader>
         <TableHeader align="right">Actions</TableHeader>
       </template>
       <template v-if="imageRegistryCredentials.length === 0" v-slot:message>
@@ -119,7 +120,8 @@ onImageRegistryCredentialListError((err) => {
           v-for="imageRegistryCredential in imageRegistryCredentials"
           v-bind:key="imageRegistryCredential.id"
           :delete-image-registry-credential="deleteImageRegistryCredentialWithConfirmation"
-          :image-registry-credential="imageRegistryCredential" />
+          :image-registry-credential="imageRegistryCredential"
+          :on-update-image-registry-credential="refetchImageRegistryCredentialList" />
       </template>
     </Table>
   </section>

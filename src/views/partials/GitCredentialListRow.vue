@@ -15,6 +15,11 @@ defineProps({
   deleteGitCredential: {
     type: Function,
     required: true
+  },
+  onUpdateGitCredential: {
+    type: Function,
+    required: false,
+    default: () => {}
   }
 })
 
@@ -31,7 +36,10 @@ const openDetailsModal = () => {
 
 <template>
   <!-- Update Git Credential modal -->
-  <UpdateGitCredentialModal :git-credential-id="gitCredential.id" ref="updateGitCredentialModalRef" />
+  <UpdateGitCredentialModal
+    :git-credential-id="gitCredential.id"
+    ref="updateGitCredentialModalRef"
+    :callback-on-pop="onUpdateGitCredential" />
   <!-- Git Credential details modal -->
   <GitCredentialDetailsModal :git-credential-id="gitCredential.id" ref="gitCredentialDetailsModalRef" />
 

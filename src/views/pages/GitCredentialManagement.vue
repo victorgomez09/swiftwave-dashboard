@@ -114,7 +114,8 @@ onGitCredentialListError((err) => {
           v-for="gitCredential in gitCredentials"
           v-bind:key="gitCredential.id"
           :delete-git-credential="deleteGitCredentialWithConfirmation"
-          :git-credential="gitCredential" />
+          :git-credential="gitCredential"
+          :on-update-git-credential="refetchGitCredentialList" />
       </template>
     </Table>
   </section>

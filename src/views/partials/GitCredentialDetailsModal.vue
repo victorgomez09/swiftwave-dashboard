@@ -16,10 +16,9 @@ const props = defineProps({
   }
 })
 
-const isCredsDetailsLoaded = ref(false)
-
 const {
   load: loadGitCredentialDetails,
+  refetch: refetchGitCredentialDetails,
   result: gitCredentialDetailsRaw,
   loading: isGitCredentialDetailsLoading,
   onError: onGitCredentialDetailsError,
@@ -42,29 +41,23 @@ const {
 )
 
 const gitCredentialDetails = computed(() => gitCredentialDetailsRaw.value?.gitCredential ?? {})
+const fetchGitCredentialDetails = () => {
+  if (loadGitCredentialDetails() === false) {
+    refetchGitCredentialDetails()
+  }
+}
 
 onGitCredentialDetailsError((err) => {
   toast.error(err.message)
 })
 
 onGitCredentialDetailsResult(() => {
-  isCredsDetailsLoaded.value = true
   isModalOpen.value = true
 })
 
-const showDetails = async () => {
-  if (!isCredsDetailsLoaded.value) {
-    await loadGitCredentialDetails()
-  } else {
-    isModalOpen.value = true
-  }
-}
-
 const isModalOpen = ref(false)
 
-const openModal = async () => {
-  await showDetails()
-}
+const openModal = () => fetchGitCredentialDetails()
 
 const closeModal = () => {
   isModalOpen.value = false
