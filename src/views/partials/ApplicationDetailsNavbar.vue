@@ -16,7 +16,7 @@
         name: 'Application Details Resource Stats',
         params: { id: $route.params.id }
       }">
-      Resource Analytics
+      Analytics
     </RouterLink>
     <RouterLink
       class="nav-element"
@@ -24,15 +24,7 @@
         name: 'Application Details Runtime Logs',
         params: { id: $route.params.id }
       }">
-      Runtime Logs
-    </RouterLink>
-    <RouterLink
-      class="nav-element"
-      :to="{
-        name: 'Application Details Manage',
-        params: { id: $route.params.id }
-      }">
-      Manage & Access
+      Runtime Log
     </RouterLink>
     <RouterLink
       class="nav-element"
@@ -45,18 +37,18 @@
     <RouterLink
       class="nav-element"
       :to="{
-        name: 'Application Details Environment Variables',
+        name: 'Application Details Persistent Volumes',
         params: { id: $route.params.id }
       }">
-      Environment Variable
+      Persistent Volume
     </RouterLink>
     <RouterLink
       class="nav-element"
       :to="{
-        name: 'Application Details Persistent Volumes',
+        name: 'Application Details Environment Variables',
         params: { id: $route.params.id }
       }">
-      Persistent Volumes
+      Environment Variables
     </RouterLink>
     <RouterLink
       class="nav-element"
@@ -64,7 +56,7 @@
         name: 'Application Details Update Source',
         params: { id: $route.params.id }
       }">
-      Update Source
+      Update App Source
     </RouterLink>
     <RouterLink
       class="nav-element"
@@ -72,7 +64,7 @@
         name: 'Application Details Deployment Config',
         params: { id: $route.params.id }
       }">
-      Deployment Config
+      Deploy Config
     </RouterLink>
     <RouterLink
       class="nav-element"
@@ -80,7 +72,15 @@
         name: 'Application Details Webhook CI',
         params: { id: $route.params.id }
       }">
-      Webhook CI
+      Configure Webhook
+    </RouterLink>
+    <RouterLink
+      class="nav-element"
+      :to="{
+        name: 'Application Details Manage',
+        params: { id: $route.params.id }
+      }">
+      Manage & Access
     </RouterLink>
     <RouterLink
       class="nav-element !text-red-500"
