@@ -8,8 +8,11 @@ import PersistentVolumeBindingEditor from '@/views/partials/DeployApplication/Pe
 import FilledButton from '@/views/components/FilledButton.vue'
 
 const props = defineProps({
-  finalizeApplicationAdditionalSettingsAndMoveToNextTab: {
+  finalizeApplicationAdditionalSettingsAndDeploy: {
     type: Function,
+    required: true
+  },
+  isDeployRequestSubmitting: {
     required: true
   }
 })
@@ -98,7 +101,7 @@ const submitDetails = () => {
     environmentVariables: environmentVariables,
     persistentVolumeBindings: Object.values(stateRef.persistentVolumeBindingsMap)
   }
-  props.finalizeApplicationAdditionalSettingsAndMoveToNextTab(details)
+  props.finalizeApplicationAdditionalSettingsAndDeploy(details)
 }
 </script>
 
@@ -149,7 +152,10 @@ const submitDetails = () => {
       class="mt-2" />
     <!-- Proceed to next -->
     <div class="mt-6 flex flex-row justify-end">
-      <FilledButton type="primary" @click="submitDetails">Confirm & Proceed to Next </FilledButton>
+      <FilledButton type="primary" @click="submitDetails" :loading="isDeployRequestSubmitting">
+        <font-awesome-icon icon="fa-solid fa-hammer" class="mr-2" />
+        Confirm & Deploy Application
+      </FilledButton>
     </div>
   </TabPanel>
 </template>

@@ -5,24 +5,17 @@ import ApplicationNameSelection from '@/views/partials/DeployApplication/Applica
 import ApplicationSourceSelection from '@/views/partials/DeployApplication/ApplicationSourceSelection.vue'
 import ApplicationSourceConfiguration from '@/views/partials/DeployApplication/ApplicationSourceConfiguration.vue'
 import ApplicationAdditionalSettings from '@/views/partials/DeployApplication/ApplicationAdditionalSettings.vue'
-import ApplicationDeployConfirmation from '@/views/partials/DeployApplication/ApplicationDeployConfirmation.vue'
 import { useMutation } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
 import { useToast } from 'vue-toastification'
 import { useRouter } from 'vue-router'
+import ModalDialog from '@/views/components/ModalDialog.vue'
 
 const toast = useToast()
 const router = useRouter()
-const sectionNames = [
-  'Application Name',
-  'Select Source',
-  'Configure Source',
-  'Additional Settings',
-  'Confirm and Deploy'
-]
-
+const sectionNames = ['Application Name', 'Select Source', 'Application Source', 'Deploy Configuration']
+const isApplicationDeployedSuccessfulModalOpen = ref(false)
 const selectedTabIndex = ref(0)
-
 const changeTab = (index) => {
   selectedTabIndex.value = index
 }
@@ -76,19 +69,20 @@ const {
 )
 
 onDeployApplicationMutationDone((result) => {
-  toast.success('Application deployed successfully !')
-  console.log(result)
   if (result.data.createApplication.latestDeployment === null) {
     toast.warning('Application is not deployed yet, please wait for a while and refresh the page')
     return
   }
-  router.push({
-    name: 'Application Deployment Details',
-    params: {
-      id: result.data.createApplication.id,
-      deployment_id: result.data.createApplication.latestDeployment.id
-    }
-  })
+  isApplicationDeployedSuccessfulModalOpen.value = true
+  setTimeout(() => {
+    router.push({
+      name: 'Application Details Deployments',
+      params: {
+        id: result.data.createApplication.id,
+        deployment_id: result.data.createApplication.latestDeployment.id
+      }
+    })
+  }, 2000)
 })
 
 onDeployApplicationMutationError((msg) => {
@@ -132,14 +126,18 @@ const finalizeApplicationSourceConfigurationAndMoveToNextTab = (configuration) =
   changeTab(3)
 }
 
-const finalizeApplicationAdditionalSettingsAndMoveToNextTab = (additionalSettings) => {
+const finalizeApplicationAdditionalSettings = (additionalSettings) => {
   // Store the configuration in the state
   // NOTE: Don't modify as configuration is a reference to the state of `ApplicationAdditionalSettings.vue`
   newApplicationState.deploymentMode = additionalSettings.deploymentMode
   newApplicationState.replicas = additionalSettings.replicas
   newApplicationState.environmentVariables = additionalSettings.environmentVariables
   newApplicationState.persistentVolumeBindings = additionalSettings.persistentVolumeBindings
-  changeTab(4)
+}
+
+const finalizeApplicationAdditionalSettingsAndDeploy = (additionalSettings) => {
+  finalizeApplicationAdditionalSettings(additionalSettings)
+  deployApplication()
 }
 
 const onClickTab = (index) => {
@@ -150,6 +148,15 @@ const onClickTab = (index) => {
 </script>
 
 <template>
+  <ModalDialog :is-open="isApplicationDeployedSuccessfulModalOpen" non-cancelable>
+    <template v-slot:header>
+      <span>🚀 Application Deployment in Progress</span>
+    </template>
+    <template v-slot:body>
+      <p class="mb-4">Application deployment has been started. Your application will be live shortly.</p>
+      <p class="italic">Redirecting to Deployment Page in few seconds</p>
+    </template>
+  </ModalDialog>
   <div class="flex h-full w-full max-w-7xl flex-col items-center sm:px-0">
     <TabGroup :selected-index="selectedTabIndex">
       <TabList class="flex w-full max-w-4xl space-x-3 rounded-full bg-primary-600 p-1">
@@ -179,12 +186,7 @@ const onClickTab = (index) => {
           " />
         <!-- Additional Settings  -->
         <ApplicationAdditionalSettings
-          :finalize-application-additional-settings-and-move-to-next-tab="
-            finalizeApplicationAdditionalSettingsAndMoveToNextTab
-          " />
-        <!--  Deploy Confirmation  -->
-        <ApplicationDeployConfirmation
-          :deploy-application="deployApplication"
+          :finalize-application-additional-settings-and-deploy="finalizeApplicationAdditionalSettingsAndDeploy"
           :is-deploy-request-submitting="isDeployRequestSubmitting" />
       </TabPanels>
     </TabGroup>

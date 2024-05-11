@@ -168,7 +168,6 @@ const updateConfig = async () => {
 </script>
 
 <template>
-  <!-- Modal for new user -->
   <ModalDialog :is-open="setupSuccessful" non-cancelable>
     <template v-slot:header>
       <span v-show="!isUpdateRequired">🚀 Setup Successful</span>
