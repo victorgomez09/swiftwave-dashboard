@@ -141,13 +141,24 @@ const finalizeApplicationAdditionalSettingsAndMoveToNextTab = (additionalSetting
   newApplicationState.persistentVolumeBindings = additionalSettings.persistentVolumeBindings
   changeTab(4)
 }
+
+const onClickTab = (index) => {
+  if (index < selectedTabIndex.value) {
+    alert('If you want to change the previous configuration, you need to refresh the page and start over')
+  }
+}
 </script>
 
 <template>
   <div class="flex h-full w-full max-w-7xl flex-col items-center sm:px-0">
     <TabGroup :selected-index="selectedTabIndex">
       <TabList class="flex w-full max-w-4xl space-x-3 rounded-full bg-primary-600 p-1">
-        <Tab v-for="sectionName in sectionNames" :key="sectionName" v-slot="{ selected }" as="template">
+        <Tab
+          v-for="(sectionName, index) in sectionNames"
+          :key="sectionName"
+          v-slot="{ selected }"
+          as="template"
+          @click="() => onClickTab(index)">
           <button :class="selected ? 'tab-button-selected' : 'tab-button-unselected'" class="tab-button">
             {{ sectionName }}
           </button>
