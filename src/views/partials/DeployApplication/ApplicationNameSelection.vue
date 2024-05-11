@@ -48,7 +48,7 @@ const isExistApplicationNameCheck = () => {
     isExistApplicationName.value = true
     return
   }
-  newApplicationName.value = newApplicationName.value.replace(/[^a-zA-Z0-9]/g, '')
+  newApplicationName.value = newApplicationName.value.replace(/[^a-zA-Z0-9_-]/g, '')
   isExistApplicationVariables.value.name = newApplicationName.value
   isExistApplicationLoad()
 }
