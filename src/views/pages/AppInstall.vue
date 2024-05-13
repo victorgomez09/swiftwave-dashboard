@@ -48,7 +48,7 @@ const suggestedIngressRules = reactive({})
 */
 const ignoredIngressRules = computed(() => {
   let rulesMap = {}
-  for (app in suggestedIngressRules) {
+  for (let app in suggestedIngressRules) {
     let ingressRules = {}
     for (let ingressRuleName of Object.keys(suggestedIngressRules[app])) {
       if (suggestedIngressRules[app][ingressRuleName].ignored) {
@@ -63,7 +63,7 @@ const ignoredIngressRules = computed(() => {
 })
 const configuredIngressRules = computed(() => {
   let rulesMap = {}
-  for (app in suggestedIngressRules) {
+  for (let app in suggestedIngressRules) {
     let ingressRules = {}
     for (let ingressRuleName of Object.keys(suggestedIngressRules[app])) {
       if (!suggestedIngressRules[app][ingressRuleName].ignored) {
@@ -103,7 +103,6 @@ const createIngressRule = (index) => {
     isAllIngressRulesCreationAttempted.value = true
     return
   }
-  console.log(ingressRuleMutations.value[index])
   createIngressRuleRaw(ingressRuleMutations.value[index])
 }
 
@@ -254,6 +253,7 @@ const replaceStackName = (originalName, stackName) => originalName.replace('{{ST
 const openInstallNowModal = () => {
   isInstallNowModalOpen.value = true
 }
+
 const closeModal = () => {
   if (confirm('Are you sure you want to cancel?')) {
     isInstallNowModalOpen.value = false
