@@ -65,8 +65,6 @@ const {
 
 const deleteDomainWithConfirmation = async (domain) => {
   if (confirm('Are you sure you want to delete this domain?')) {
-    console.log('Deleting domain', domain)
-    console.log('Domain ID', domain.id)
     deleteDomain({ id: domain.id })
   }
 }

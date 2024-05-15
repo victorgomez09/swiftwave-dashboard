@@ -22,9 +22,12 @@ const props = defineProps({
 
 const toast = useToast()
 const isModalOpen = ref(false)
+const isInvalidDomainName = ref(false)
+const domainRegex = /^((?:[-a-z0-9]+\.)+)([a-z]{2,63})\/?$/i
 
 const openModal = () => {
   newDomainDetails.name = ''
+  isInvalidDomainName.value = false
   isModalOpen.value = true
 }
 const closeModal = () => {
@@ -38,7 +41,7 @@ const newDomainDetails = reactive({
 })
 
 const {
-  mutate: registerDomain,
+  mutate: registerDomainRaw,
   loading: isDomainRegistering,
   onDone: onDomainRegisterSuccess,
   onError: onDomainRegisterFail
@@ -58,16 +61,30 @@ const {
   }
 )
 
-onDomainRegisterSuccess(() => {
+onDomainRegisterSuccess((r) => {
   closeModal()
   newDomainDetails.name = ''
+  isInvalidDomainName.value = false
   toast.success('Domain registered successfully')
-  props.callbackOnCreate()
+  props.callbackOnCreate(r.data.addDomain.id)
 })
 
 onDomainRegisterFail((err) => {
   toast.error(err.message)
 })
+
+const registerDomain = async () => {
+  if (newDomainDetails.name === '') {
+    isInvalidDomainName.value = true
+    return
+  }
+  // validate name
+  if (!domainRegex.test(newDomainDetails.name)) {
+    isInvalidDomainName.value = true
+    return
+  }
+  registerDomainRaw()
+}
 
 defineExpose({
   openModal,
@@ -99,6 +116,9 @@ defineExpose({
                 type="text" />
             </div>
           </div>
+          <p v-if="isInvalidDomainName" class="mt-0.5 text-sm font-normal text-danger-500">
+            Provide a valid domain name
+          </p>
         </form>
       </template>
       <template v-slot:footer>
