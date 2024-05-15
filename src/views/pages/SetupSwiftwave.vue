@@ -6,6 +6,7 @@ import ModalDialog from '@/views/components/ModalDialog.vue'
 import { useToast } from 'vue-toastification'
 import { useRouter } from 'vue-router'
 import { useSystemConfigStore } from '@/store/systemConfig.js'
+import { preventSpaceInput } from '@/vendor/utils.js'
 
 const toast = useToast()
 const router = useRouter()
@@ -247,7 +248,7 @@ const updateConfig = async () => {
           <span>Email Address</span>
           <span>You will receive all the SSL expiry related notifications on this e-mail</span>
         </div>
-        <input type="text" v-model="formState.lets_encrypt.email_address" />
+        <input type="text" v-model="formState.lets_encrypt.email_address" @keydown="preventSpaceInput" />
       </div>
       <div class="content">
         <div class="input-label">
