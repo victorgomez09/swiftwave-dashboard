@@ -204,7 +204,7 @@ const updateConfig = async () => {
           <span>Username</span>
           <span>Username for the new admin</span>
         </div>
-        <input type="text" v-model="formState.new_admin_credential.username" />
+        <input type="text" v-model="formState.new_admin_credential.username" @keydown="preventSpaceInput" />
       </div>
       <div class="content">
         <div class="input-label">
@@ -226,14 +226,14 @@ const updateConfig = async () => {
           <span>Overlay Network Name</span>
           <span>All the applications deployed through swiftwave will be connected to this overlay network</span>
         </div>
-        <input type="text" v-model="formState.network_name" />
+        <input type="text" v-model="formState.network_name" @keydown="preventSpaceInput" />
       </div>
       <div class="content">
         <div class="input-label">
           <span>Extra Restricted Ports (comma seperated)</span>
           <span>Enter the ports you like to restrict in addition to the default restricted ports</span>
         </div>
-        <input type="text" v-model="formState.extra_restricted_ports" />
+        <input type="text" v-model="formState.extra_restricted_ports" @keydown="preventSpaceInput" />
       </div>
     </div>
     <!-- Lets Encrypt Info  -->
