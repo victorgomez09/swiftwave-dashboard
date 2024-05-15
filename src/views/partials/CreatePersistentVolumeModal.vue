@@ -56,6 +56,7 @@ const openModal = () => {
   newPersistentVolumeDetails.cifsConfig.dir_mode = '0777'
   isModalOpen.value = true
 }
+
 const closeModal = () => {
   isModalOpen.value = false
   props.callbackOnPop()
@@ -171,6 +172,32 @@ defineExpose({
             <option value="3">NFS v3</option>
             <option value="2">NFS v2</option>
           </select>
+          <!-- RCPBind Alert  -->
+          <div
+            class="mb-5 mt-3 rounded border-s-4 border-danger-200 bg-danger-50 p-4"
+            role="alert"
+            v-if="
+              newPersistentVolumeDetails.nfsConfig.version === '2' ||
+              newPersistentVolumeDetails.nfsConfig.version === '3'
+            ">
+            <p class="block text-justify text-sm text-gray-900">
+              During the installation of <b>swiftwave</b>, <b>rpcbind</b> service has been disabled to keep the servers
+              secured. But, NFS v2, v3 has requirement of <b>rpcbind</b> service. Kindly enable <b>rpcbind</b> service
+              on the servers before proceeding.
+
+              <br /><br />
+              You can checkout
+              <a
+                href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/securing_networks/securing-network-services_securing-networks"
+                target="_blank"
+                class="font-bold text-blue-500"
+                >this blog from Red Hat</a
+              >
+              to learn best practices to secure <b>rpcbind</b> service.
+
+              <br /><br />Ignore this warning if you have already enabled <b>rpcbind</b> service.
+            </p>
+          </div>
         </div>
         <!--   CIFS Host     -->
         <div v-if="newPersistentVolumeDetails.type === 'cifs'" class="mt-2">
