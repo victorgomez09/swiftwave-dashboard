@@ -26,5 +26,5 @@ defineProps({
 </script>
 
 <template>
-  <div class="prose" v-html="markdown.render(source)" />
+  <div class="prose max-w-full" v-html="markdown.render(source)" />
 </template>
