@@ -33,6 +33,7 @@ const props = defineProps({
 const router = useRouter()
 const toast = useToast()
 const isModalOpen = ref(false)
+const verifyDependencyInterval = ref(null)
 
 const openModal = () => {
   isModalOpen.value = true
@@ -97,6 +98,9 @@ onTestSshAccessToServerSuccess((result) => {
   if (result?.data?.testSSHAccessToServer ?? false) {
     info.sshVerified = 1
     info.step = 2
+    verifyDependencyInterval.value = setInterval(() => {
+      verifyDependencies()
+    }, 5000)
   } else {
     info.sshVerified = 0
   }
@@ -142,6 +146,10 @@ onVerifyDependenciesSuccess((result) => {
     info.dependenciesInstalled = isAvailable ? 1 : 0
     if (isAvailable) {
       info.step = 3
+      if (verifyDependencyInterval.value !== null) {
+        clearInterval(verifyDependencyInterval.value)
+        verifyDependencyInterval.value = null
+      }
       loadNetworkInterfacesOfServer()
     }
   }
@@ -283,7 +291,7 @@ onNetworkInterfacesOfServerResult((result) => {
 
 <template>
   <teleport to="body">
-    <ModalDialog :close-modal="closeModal" :is-open="isModalOpen" :key="serverId + '_setup_server_modal'" width="xl">
+    <ModalDialog :close-modal="closeModal" :is-open="isModalOpen" :key="serverId + '_setup_server_modal'" width="2xl">
       <template v-slot:header>Setup Server - {{ serverIp }}</template>
       <template v-slot:body>
         <div class="mt-6">
@@ -349,7 +357,9 @@ onNetworkInterfacesOfServerResult((result) => {
                 </FilledButton>
 
                 <FilledButton class="w-full" :click="verifyDependencies" :loading="isVerifyingDependencies">
-                  <font-awesome-icon icon="fa-solid fa-arrow-rotate-right" />&nbsp;&nbsp; Verify Required Dependencies
+                  <font-awesome-icon
+                    icon="fa-solid fa-arrow-rotate-right"
+                    v-show="!isVerifyingDependencies" />&nbsp;&nbsp; Verify Required Dependencies
                 </FilledButton>
               </div>
 
