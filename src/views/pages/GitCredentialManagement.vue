@@ -58,6 +58,7 @@ const deleteGitCredentialWithConfirmation = (gitCredential) => {
 const {
   result: gitCredentialList,
   refetch: refetchGitCredentialList,
+  loading: isGitCredentialListLoading,
   onError: onGitCredentialListError
 } = useQuery(
   gql`
@@ -71,7 +72,7 @@ const {
   `,
   null,
   {
-    pollInterval: 10000
+    pollInterval: 30000
   }
 )
 const gitCredentials = computed(() => gitCredentialList.value?.gitCredentials ?? [])
@@ -90,7 +91,17 @@ onGitCredentialListError((err) => {
       <template v-slot:title>Git Credentials</template>
       <template v-slot:subtitle> Manage Git Credentials and usage in deployments</template>
       <template v-slot:buttons>
-        <FilledButton :click="openCreateGitCredentialModal" type="primary">Add New</FilledButton>
+        <FilledButton :click="openCreateGitCredentialModal" type="primary">
+          <font-awesome-icon icon="fa-solid fa-plus" class="mr-2" />
+          Add New
+        </FilledButton>
+        <FilledButton type="ghost" :click="refetchGitCredentialList">
+          <font-awesome-icon
+            icon="fa-solid fa-arrows-rotate"
+            :class="{
+              'animate-spin ': isGitCredentialListLoading
+            }" />&nbsp;&nbsp; Refresh List
+        </FilledButton>
       </template>
     </PageBar>
 
