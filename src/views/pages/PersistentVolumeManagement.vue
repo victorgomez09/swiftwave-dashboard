@@ -71,6 +71,7 @@ onDomainDeleteFail((err) => {
 const {
   result: persistentVolumesRaw,
   refetch: refetchPersistentVolumes,
+  loading: isPersistentVolumesLoading,
   onError: onPersistentVolumesError
 } = useQuery(gql`
   query {
@@ -276,7 +277,7 @@ const showDetails = (volume) => {
             <label class="block text-sm font-medium text-gray-700">Volume Type</label>
             <div class="mt-1">
               <Badge type="success" v-if="selectedVolumeDetails.type === 'local'">Local</Badge>
-              <Badge type="warning" v-if="selectedVolumeDetails.type === 'nfs'"> &nbsp;&nbsp;NFS&nbsp;&nbsp; </Badge>
+              <Badge type="warning" v-if="selectedVolumeDetails.type === 'nfs'"> &nbsp;&nbsp;NFS&nbsp;&nbsp;</Badge>
               <Badge type="warning" v-if="selectedVolumeDetails.type === 'cifs'">&nbsp;CIFS&nbsp;</Badge>
             </div>
           </div>
@@ -365,7 +366,17 @@ const showDetails = (volume) => {
       <template v-slot:title>Persistent Volume</template>
       <template v-slot:subtitle>Manage Persistent Volume</template>
       <template v-slot:buttons>
-        <FilledButton :click="openCreatePersistentVolumeModal" type="primary">Add New</FilledButton>
+        <FilledButton :click="openCreatePersistentVolumeModal" type="primary">
+          <font-awesome-icon icon="fa-solid fa-plus" class="mr-2" />
+          Add New
+        </FilledButton>
+        <FilledButton type="ghost" :click="refetchPersistentVolumes">
+          <font-awesome-icon
+            icon="fa-solid fa-arrows-rotate"
+            :class="{
+              'animate-spin ': isPersistentVolumesLoading
+            }" />&nbsp;&nbsp; Refresh List
+        </FilledButton>
       </template>
     </PageBar>
 
