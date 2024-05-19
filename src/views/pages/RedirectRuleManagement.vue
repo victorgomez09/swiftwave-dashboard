@@ -116,6 +116,7 @@ onRedirectRuleDeleteFail((err) => {
 const {
   result: redirectRulesRaw,
   refetch: refetchRedirectRules,
+  loading: isRedirectRulesLoading,
   onError: onRedirectRulesError
 } = useQuery(
   gql`
@@ -226,7 +227,17 @@ const openRedirectRuleRegistrationModal = () => {
       <template v-slot:title>Redirect Rules</template>
       <template v-slot:subtitle>Manage Redirect Rules</template>
       <template v-slot:buttons>
-        <FilledButton :click="openModal" type="primary">Add New</FilledButton>
+        <FilledButton :click="openModal" type="primary">
+          <font-awesome-icon icon="fa-solid fa-plus" class="mr-2" />
+          Add New
+        </FilledButton>
+        <FilledButton type="ghost" :click="refetchRedirectRules">
+          <font-awesome-icon
+            icon="fa-solid fa-arrows-rotate"
+            :class="{
+              'animate-spin ': isRedirectRulesLoading
+            }" />&nbsp;&nbsp; Refresh List
+        </FilledButton>
       </template>
     </PageBar>
 
