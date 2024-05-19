@@ -1,8 +1,8 @@
 <script setup>
 import FilledButton from '@/views/components/FilledButton.vue'
 import ModalDialog from '@/views/components/ModalDialog.vue'
-import { reactive, ref } from 'vue'
-import { useMutation } from '@vue/apollo-composable'
+import { computed, reactive, ref } from 'vue'
+import { useMutation, useQuery } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
 import { useToast } from 'vue-toastification'
 import { preventSpaceInput } from '@/vendor/utils.js'
@@ -92,6 +92,14 @@ onDomainRegisterFail((err) => {
   toast.error(err.message)
 })
 
+const { result: noOfServersResult } = useQuery(gql`
+  query {
+    noOfServers
+  }
+`)
+
+const noOfServers = computed(() => noOfServersResult.value?.noOfServers ?? 0)
+
 defineExpose({
   openModal,
   closeModal
@@ -129,6 +137,16 @@ defineExpose({
             <option value="nfs">NFS</option>
             <option value="cifs">CIFS</option>
           </select>
+          <div
+            class="mb-5 mt-3 rounded border-s-4 border-danger-200 bg-danger-50 p-4"
+            v-if="newPersistentVolumeDetails.type === 'local' && noOfServers > 1">
+            <p class="block text-justify text-sm text-gray-900">
+              You have <b>{{ noOfServers }} servers</b> configured for cluster mode.
+              <br />
+              Try to avoid create <b>Local</b> type persistent volume. Instead use <b>NFS</b> or <b>CIFS</b> persistent
+              volume.
+            </p>
+          </div>
         </div>
         <!--   NFS Server Host    -->
         <div v-if="newPersistentVolumeDetails.type === 'nfs'" class="mt-2">
