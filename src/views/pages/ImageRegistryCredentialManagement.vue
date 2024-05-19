@@ -60,6 +60,7 @@ const deleteImageRegistryCredentialWithConfirmation = (imageRegistryCredential) 
 const {
   result: imageRegistryCredentialList,
   refetch: refetchImageRegistryCredentialList,
+  loading: isImageRegistryCredentialListLoading,
   onError: onImageRegistryCredentialListError
 } = useQuery(
   gql`
@@ -74,7 +75,7 @@ const {
   `,
   null,
   {
-    pollInterval: 10000
+    pollInterval: 30000
   }
 )
 const imageRegistryCredentials = computed(() => imageRegistryCredentialList.value?.imageRegistryCredentials ?? [])
@@ -96,7 +97,17 @@ onImageRegistryCredentialListError((err) => {
       <template v-slot:title>Image Registry Credentials</template>
       <template v-slot:subtitle> Manage Image Registry Credentials and usage in deployments</template>
       <template v-slot:buttons>
-        <FilledButton :click="openCreateImageRegistryCredentialModal" type="primary">Add New</FilledButton>
+        <FilledButton :click="openCreateImageRegistryCredentialModal" type="primary">
+          <font-awesome-icon icon="fa-solid fa-plus" class="mr-2" />
+          Add New
+        </FilledButton>
+        <FilledButton type="ghost" :click="refetchImageRegistryCredentialList">
+          <font-awesome-icon
+            icon="fa-solid fa-arrows-rotate"
+            :class="{
+              'animate-spin ': isImageRegistryCredentialListLoading
+            }" />&nbsp;&nbsp; Refresh List
+        </FilledButton>
       </template>
     </PageBar>
 
