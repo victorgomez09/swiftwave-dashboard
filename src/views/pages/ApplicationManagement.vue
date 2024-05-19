@@ -20,6 +20,7 @@ const deployNewApplication = () => {
 
 const {
   result: applicationsResult,
+  refetch: refetchApplications,
   loading: isApplicationsLoading,
   onError: onApplicationsError
 } = useQuery(
@@ -49,7 +50,7 @@ const {
   `,
   null,
   {
-    pollInterval: 10000
+    pollInterval: 30000
   }
 )
 
@@ -78,7 +79,17 @@ const applicationGroupWise = computed(() => {
       <template v-slot:title>Deployed Applications</template>
       <template v-slot:subtitle>Take control of your deployed applications</template>
       <template v-slot:buttons>
-        <FilledButton :click="deployNewApplication" type="primary">Deploy New</FilledButton>
+        <FilledButton :click="deployNewApplication" type="primary">
+          <font-awesome-icon icon="fa-solid fa-hammer" class="mr-2" />
+          Deploy App
+        </FilledButton>
+        <FilledButton type="ghost" :click="refetchApplications">
+          <font-awesome-icon
+            icon="fa-solid fa-arrows-rotate"
+            :class="{
+              'animate-spin ': isApplicationsLoading
+            }" />&nbsp;&nbsp; Refresh List
+        </FilledButton>
       </template>
     </PageBar>
 
