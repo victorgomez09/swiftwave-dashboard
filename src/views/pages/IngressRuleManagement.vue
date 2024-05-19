@@ -23,7 +23,17 @@ const refetchIngressRuleList = computed(() => ingressRuleListRef.value?.refetchI
       <template v-slot:title>Ingress Rules</template>
       <template v-slot:subtitle>Manage Ingress Rules</template>
       <template v-slot:buttons>
-        <FilledButton :click="openNewIngressRuleModal" type="primary">Add New</FilledButton>
+        <FilledButton :click="openNewIngressRuleModal" type="primary">
+          <font-awesome-icon icon="fa-solid fa-plus" class="mr-2" />
+          Add New
+        </FilledButton>
+        <FilledButton type="ghost" :click="refetchIngressRuleList">
+          <font-awesome-icon
+            icon="fa-solid fa-arrows-rotate"
+            :class="{
+              'animate-spin ': ingressRuleListRef?.isIngressRulesLoading ?? false
+            }" />&nbsp;&nbsp; Refresh List
+        </FilledButton>
       </template>
     </PageBar>
     <!--  Ingress Rule List  -->

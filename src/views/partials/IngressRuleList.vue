@@ -98,6 +98,7 @@ const applicationSpecificIngressRulesQuery = gql`
 const {
   result: ingressRulesRaw,
   refetch: refetchIngressRules,
+  loading: isIngressRulesLoading,
   onError: onIngressRulesError
 } = useQuery(
   props.applicationId ? applicationSpecificIngressRulesQuery : fetchAllIngressRulesQuery,
@@ -120,7 +121,8 @@ onIngressRulesError((err) => {
 })
 
 defineExpose({
-  refetchIngressRules
+  refetchIngressRules,
+  isIngressRulesLoading
 })
 </script>
 
