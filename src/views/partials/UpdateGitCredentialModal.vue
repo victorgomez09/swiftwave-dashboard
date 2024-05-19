@@ -194,9 +194,7 @@ onGitCredentialUpdateSuccess(() => {
           <label class="block text-sm font-medium text-gray-700" for="ssh_private_key">
             ED25519 Private Key (In OpenSSH Format)
           </label>
-          <p class="mt-1 text-sm text-gray-500">
-            <b class="text-danger-500">NOTE:</b> Leave the input blank if you like to auto-generate the private key
-          </p>
+          <p class="mt-1 text-sm text-gray-500">Leave the input blank to keep the existing private key</p>
           <div class="mt-2">
             <textarea
               id="ssh_private_key"
