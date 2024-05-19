@@ -28,6 +28,7 @@ const closeDetailsModal = () => {
 const {
   result: domainListResult,
   refetch: refetchDomainList,
+  loading: isDomainListLoading,
   onError: onDomainListError
 } = useQuery(
   gql`
@@ -235,10 +236,20 @@ const openNewDomainModal = computed(() => createDomainModal.value?.openModal ?? 
 
     <!-- Top Page bar   -->
     <PageBar>
-      <template v-slot:title>Custom Domain</template>
+      <template v-slot:title>Manage Domains</template>
       <template v-slot:subtitle>Manage Registered Domains and SSL Certificates</template>
       <template v-slot:buttons>
-        <FilledButton :click="openNewDomainModal" type="primary">Register New</FilledButton>
+        <FilledButton :click="openNewDomainModal" type="primary">
+          <font-awesome-icon icon="fa-solid fa-plus" class="mr-2" />
+          Register New
+        </FilledButton>
+        <FilledButton type="ghost" :click="refetchDomainList">
+          <font-awesome-icon
+            icon="fa-solid fa-arrows-rotate"
+            :class="{
+              'animate-spin ': isDomainListLoading
+            }" />&nbsp;&nbsp; Refresh List
+        </FilledButton>
       </template>
     </PageBar>
 
