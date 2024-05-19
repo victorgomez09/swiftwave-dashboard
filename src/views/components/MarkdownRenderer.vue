@@ -8,6 +8,13 @@ import MarkdownItSub from 'markdown-it-sub'
 import MarkdownItSup from 'markdown-it-sup'
 import MarkdownItTasklists from 'markdown-it-task-lists'
 
+defineProps({
+  source: {
+    type: String,
+    default: ''
+  }
+})
+
 const markdown = new MarkdownIt()
   .use(MarkdownItAbbr)
   .use(MarkdownItAnchor)
@@ -17,12 +24,17 @@ const markdown = new MarkdownIt()
   .use(MarkdownItSup)
   .use(MarkdownItTasklists)
 
-defineProps({
-  source: {
-    type: String,
-    default: ''
+// force open links in new tab
+const defaultRender =
+  markdown.renderer.rules.link_open ||
+  function (tokens, idx, options, env, self) {
+    return self.renderToken(tokens, idx, options)
   }
-})
+
+markdown.renderer.rules.link_open = function (tokens, idx, options, env, self) {
+  tokens[idx].attrSet('target', '_blank')
+  return defaultRender(tokens, idx, options, env, self)
+}
 </script>
 
 <template>
