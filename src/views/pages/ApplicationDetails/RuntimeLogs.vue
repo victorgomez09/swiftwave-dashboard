@@ -18,7 +18,8 @@ const showRuntimeLog = ref(false)
 const statsTimeframe = ref('live')
 const terminal = new Terminal({
   convertEol: true,
-  rows: 35
+  rows: 35,
+  scrollback: 9999999
 })
 const fitAddon = new FitAddon()
 terminal.loadAddon(fitAddon)

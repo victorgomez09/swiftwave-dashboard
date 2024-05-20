@@ -65,7 +65,8 @@ const deployedOn = computed(() => {
 const showDeploymentLog = ref(false)
 const terminal = new Terminal({
   convertEol: true,
-  rows: 30
+  rows: 30,
+  scrollback: 9999999
 })
 const fitAddon = new FitAddon()
 terminal.loadAddon(fitAddon)
