@@ -1,31 +1,29 @@
 <script setup>
-import logo from '@/assets/images/logo-full.png'
-
 defineProps({
   show: {
     type: Boolean,
     default: false
   }
 })
-
 </script>
 
 <template>
-<div class="loading-page" v-show="show">
-  <img alt="swiftwave brand logo" :src="logo" class="h-20" />
-  <div class="spinner-box">
-    <div class="pulse-container">
-      <div class="pulse-bubble pulse-bubble-1"></div>
-      <div class="pulse-bubble pulse-bubble-2"></div>
-      <div class="pulse-bubble pulse-bubble-3"></div>
-    </div>
+  <div class="absolute z-50 flex h-[100vh] w-[100vw] flex-col items-center justify-center bg-white" v-show="show">
+    <span class="loading loading-spinner loading-lg"></span>
+    <!-- <img alt="swiftwave brand logo" :src="logo" class="h-20" />
+    <div class="spinner-box">
+      <div class="pulse-container">
+        <div class="pulse-bubble pulse-bubble-1"></div>
+        <div class="pulse-bubble pulse-bubble-2"></div>
+        <div class="pulse-bubble pulse-bubble-3"></div>
+      </div>
+    </div> -->
   </div>
-</div>
 </template>
 
-<style scoped>
+<!-- <style scoped>
 .loading-page {
-  @apply w-[100vw] h-[100vh] flex flex-col justify-center items-center absolute bg-white z-50
+  @apply;
 }
 
 @keyframes pulse {
@@ -34,8 +32,8 @@ defineProps({
     transform: scale(1);
   }
   to {
-    opacity: .25;
-    transform: scale(.75);
+    opacity: 0.25;
+    transform: scale(0.75);
   }
 }
 
@@ -59,19 +57,18 @@ defineProps({
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: #6B46C1;
+  background-color: #6b46c1;
 }
 
 .pulse-bubble-1 {
-  animation: pulse .4s ease 0s infinite alternate;
+  animation: pulse 0.4s ease 0s infinite alternate;
 }
 
 .pulse-bubble-2 {
-  animation: pulse .4s ease .2s infinite alternate;
+  animation: pulse 0.4s ease 0.2s infinite alternate;
 }
 
 .pulse-bubble-3 {
-  animation: pulse .4s ease .4s infinite alternate;
+  animation: pulse 0.4s ease 0.4s infinite alternate;
 }
-
-</style>
+</style> -->

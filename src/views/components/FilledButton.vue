@@ -56,8 +56,7 @@ const isDisabled = computed(() => {
       v-if="loading"
       :class="{
         'h-5 w-5': !slim,
-        'h-3 w-3': slim,
-        'text-white': type !== 'ghost'
+        'h-3 w-3': slim
       }"
       class="-ml-1 mr-3 animate-spin"
       fill="none"
