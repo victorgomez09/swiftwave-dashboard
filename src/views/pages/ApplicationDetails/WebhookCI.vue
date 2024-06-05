@@ -123,7 +123,7 @@ const regenerateWebhookTokenWithConfirmation = () => {
   <div class="mt-6 flex w-full flex-row items-center justify-between rounded-md">
     <div>
       <p class="inline-flex items-center gap-2 text-lg font-medium">Regenerate Webhook Token</p>
-      <p class="text-sm text-secondary-700">Regenerate the webhook token if you think it is compromised.</p>
+      <p class="text-secondary text-sm">Regenerate the webhook token if you think it is compromised.</p>
     </div>
     <FilledButton
       type="primary"

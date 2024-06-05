@@ -272,7 +272,7 @@ const showDetails = (volume) => {
             <label class="block text-sm font-medium text-gray-700">Volume Name</label>
             <div class="mt-1">
               <p
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
+                class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm">
                 {{ selectedVolumeDetails.name }}
               </p>
             </div>
@@ -290,7 +290,7 @@ const showDetails = (volume) => {
           <label class="block text-sm font-medium text-gray-700">NFS Config</label>
           <div class="mt-1">
             <p
-              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
+              class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm">
               {{ selectedVolumeDetails.nfsConfig.host }}:{{ selectedVolumeDetails.nfsConfig.path }}
             </p>
           </div>
@@ -299,7 +299,7 @@ const showDetails = (volume) => {
           <label class="block text-sm font-medium text-gray-700">NFS Version</label>
           <div class="mt-1">
             <p
-              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
+              class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm">
               {{ selectedVolumeDetails.nfsConfig.version }}
             </p>
           </div>
@@ -308,7 +308,7 @@ const showDetails = (volume) => {
           <label class="block text-sm font-medium text-gray-700">CIFS Host</label>
           <div class="mt-1">
             <p
-              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
+              class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm">
               {{ selectedVolumeDetails.cifsConfig.host }}
             </p>
           </div>
@@ -317,7 +317,7 @@ const showDetails = (volume) => {
           <label class="block text-sm font-medium text-gray-700">CIFS Share</label>
           <div class="mt-1">
             <p
-              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
+              class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm">
               {{ selectedVolumeDetails.cifsConfig.share }}
             </p>
           </div>
@@ -327,7 +327,7 @@ const showDetails = (volume) => {
             <label class="block text-sm font-medium text-gray-700">Username</label>
             <div class="mt-1">
               <p
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
+                class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm">
                 {{ selectedVolumeDetails.cifsConfig.username }}
               </p>
             </div>
@@ -344,7 +344,7 @@ const showDetails = (volume) => {
             <label class="block text-sm font-medium text-gray-700">File Mode</label>
             <div class="mt-1">
               <p
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
+                class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm">
                 {{ selectedVolumeDetails.cifsConfig.file_mode }}
               </p>
             </div>
@@ -353,7 +353,7 @@ const showDetails = (volume) => {
             <label class="block text-sm font-medium text-gray-700">Dir Mode</label>
             <div class="mt-1">
               <p
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
+                class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm">
                 {{ selectedVolumeDetails.cifsConfig.dir_mode }}
               </p>
             </div>
@@ -364,7 +364,7 @@ const showDetails = (volume) => {
             <label class="block text-sm font-medium text-gray-700">UID</label>
             <div class="mt-1">
               <p
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
+                class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm">
                 {{ selectedVolumeDetails.cifsConfig.uid }}
               </p>
             </div>
@@ -373,7 +373,7 @@ const showDetails = (volume) => {
             <label class="block text-sm font-medium text-gray-700">GID</label>
             <div class="mt-1">
               <p
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
+                class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm">
                 {{ selectedVolumeDetails.cifsConfig.gid }}
               </p>
             </div>

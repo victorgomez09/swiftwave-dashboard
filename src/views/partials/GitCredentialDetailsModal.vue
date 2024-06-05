@@ -80,7 +80,7 @@ defineExpose({
           <div class="w-1/2">
             <label class="block text-sm font-medium text-gray-700">Name</label>
             <div class="mt-1">
-              <p class="block w-full rounded-md focus:ring-primary-500 sm:text-sm">
+              <p class="focus:ring-primary block w-full rounded-md sm:text-sm">
                 {{ gitCredentialDetails.name ?? '' }}
               </p>
             </div>
@@ -98,7 +98,7 @@ defineExpose({
           <div class="w-1/2">
             <label class="block text-sm font-medium text-gray-700">Username</label>
             <div class="mt-1">
-              <p class="block w-full rounded-md focus:ring-primary-500 sm:text-sm">
+              <p class="focus:ring-primary block w-full rounded-md sm:text-sm">
                 {{ gitCredentialDetails.username ?? '' }}
               </p>
             </div>
@@ -106,7 +106,7 @@ defineExpose({
           <div class="w-1/2">
             <label class="block text-sm font-medium text-gray-700">Password</label>
             <div class="mt-1">
-              <p class="block w-full rounded-md italic focus:ring-primary-500 sm:text-sm">Can't show (Confidential)</p>
+              <p class="focus:ring-primary block w-full rounded-md italic sm:text-sm">Can't show (Confidential)</p>
             </div>
           </div>
         </div>

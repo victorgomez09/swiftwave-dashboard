@@ -65,7 +65,7 @@ const isExistApplicationNameCheck = () => {
           v-model="newApplicationName"
           @keydown="preventSpaceInput"
           autocomplete="off"
-          class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+          class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
           v-debounce:1000ms="isExistApplicationNameCheck" />
       </div>
       <div

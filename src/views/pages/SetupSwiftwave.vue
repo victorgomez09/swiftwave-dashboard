@@ -656,19 +656,19 @@ const updateConfig = async () => {
     }
 
     select {
-      @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500;
+      @apply focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm;
     }
 
     input {
-      @apply w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-primary-500 focus:ring-primary-500;
+      @apply focus:border-primary focus:ring-primary w-full rounded-md border border-gray-300 p-2 shadow-sm;
     }
   }
 
   .multi-select {
-    @apply flex h-fit w-min overflow-hidden rounded-md border border-secondary-400;
+    @apply border-secondary flex h-fit w-min overflow-hidden rounded-md border;
 
     div {
-      @apply cursor-pointer border-r border-secondary-400 bg-secondary-100 px-5 py-2 transition-all hover:bg-secondary-400 hover:text-white;
+      @apply border-secondary bg-secondary hover:bg-secondary cursor-pointer border-r px-5 py-2 transition-all hover:text-white;
     }
 
     div:last-child {
@@ -676,7 +676,7 @@ const updateConfig = async () => {
     }
 
     .active {
-      @apply bg-primary-600  text-white;
+      @apply bg-primary  text-white;
     }
   }
 }

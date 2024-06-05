@@ -99,7 +99,7 @@ const formatdate = (date) => {
       </div>
     </RouterLink>
   </div>
-  <p class="mt-4 w-full text-center text-sm text-secondary-700">Scroll down to view more deployments(if any)</p>
+  <p class="text-secondary mt-4 w-full text-center text-sm">Scroll down to view more deployments(if any)</p>
 </template>
 
 <style scoped></style>

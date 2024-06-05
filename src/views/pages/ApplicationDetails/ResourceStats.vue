@@ -103,7 +103,7 @@ onMounted(() => {
         <template v-slot:subtitle>Monitor the resource analytics of your application</template>
         <template v-slot:buttons>
           <select
-            class="block rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+            class="focus:border-primary focus:ring-primary block rounded-md border-gray-300 shadow-sm sm:text-sm"
             v-model="statsTimeframe"
             @change="loadResourceAnalytics">
             <option value="last_1_hour">Last 1 hour</option>

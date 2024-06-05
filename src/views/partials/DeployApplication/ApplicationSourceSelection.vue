@@ -76,14 +76,14 @@ const setSourceType = (type) => {
 }
 
 .optionButtonSelected {
-  @apply border-primary-500;
+  @apply border-primary;
 }
 
 .optionButtonSelected p {
-  @apply text-primary-600;
+  @apply text-primary;
 }
 
 .optionButtonSelected .optionIcon {
-  @apply text-primary-600;
+  @apply text-primary;
 }
 </style>

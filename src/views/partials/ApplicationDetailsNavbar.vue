@@ -95,14 +95,14 @@
 
 <style scoped>
 .navbar {
-  @apply flex h-min select-none flex-col flex-wrap gap-1 rounded-lg border border-secondary-200 p-1.5;
+  @apply border-secondary flex h-min select-none flex-col flex-wrap gap-1 rounded-lg border p-1.5;
 }
 
 .nav-element {
-  @apply min-w-max rounded-md px-3 py-2 text-sm text-secondary-700 hover:bg-secondary-100;
+  @apply hover:bg-secondary text-secondary min-w-max rounded-md px-3 py-2 text-sm;
 }
 
 .router-link-exact-active {
-  @apply bg-secondary-100 font-medium text-black;
+  @apply bg-secondary font-medium text-black;
 }
 </style>

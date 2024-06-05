@@ -41,7 +41,7 @@ const copyToClipboard = () => {
 
 <template>
   <div
-    class="relative my-2 break-words rounded-lg border-2 border-secondary-300 bg-secondary-100 p-3 transition-all"
+    class="border-secondary bg-secondary relative my-2 break-words rounded-lg border-2 p-3 transition-all"
     :class="{
       'ring-2 ring-primary-300': showCopyBorder
     }">

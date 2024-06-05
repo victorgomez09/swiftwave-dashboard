@@ -165,7 +165,7 @@ const onClickTab = (index) => {
   </ModalDialog>
   <div class="flex h-full w-full max-w-7xl flex-col items-center sm:px-0">
     <TabGroup :selected-index="selectedTabIndex">
-      <TabList class="flex w-full max-w-4xl space-x-3 rounded-full bg-primary-600 p-1">
+      <TabList class="bg-primary flex w-full max-w-4xl space-x-3 rounded-full p-1">
         <Tab
           v-for="(sectionName, index) in sectionNames"
           :key="sectionName"

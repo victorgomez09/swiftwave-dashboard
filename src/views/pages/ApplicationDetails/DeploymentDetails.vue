@@ -190,7 +190,7 @@ onCancelDeploymentError((err) => {
       class="flex flex-row items-center justify-between rounded-md bg-red-100 px-3 py-2">
       <div>
         <p class="inline-flex items-center gap-2 text-lg font-medium">Cancel Deployment</p>
-        <p class="text-sm text-secondary-700">
+        <p class="text-secondary text-sm">
           If you are feeling deployment has been stuck for a long time, you can cancel the deployment.
         </p>
       </div>
@@ -204,7 +204,7 @@ onCancelDeploymentError((err) => {
       Deployment Logs
       <StatusPulse v-if="isTerminalLoading" type="success" />
     </p>
-    <p class="text-sm text-secondary-700">
+    <p class="text-secondary text-sm">
       If you feel that deployment log is not automatically updating, please refresh the page.
     </p>
   </section>

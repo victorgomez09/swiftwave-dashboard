@@ -104,7 +104,7 @@ const openPersistentVolumeModal = computed(() => createPersistentVolumeModalRef.
         <TableRow>
           <select
             :key="`credential-${key}`"
-            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+            class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
             @change="(event) => onPersistentVolumeChange(key, event.target.value)">
             <option selected value="0">Select Persistent Volume</option>
             <option
@@ -119,7 +119,7 @@ const openPersistentVolumeModal = computed(() => createPersistentVolumeModalRef.
         <TableRow>
           <input
             :key="`value-${key}`"
-            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+            class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
             placeholder="Mounted Path"
             type="text"
             v-bind:value="persistentVolumeBindingsMap[key]?.mountingPath ?? ''"

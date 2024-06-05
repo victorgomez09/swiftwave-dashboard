@@ -18,7 +18,7 @@ defineProps({
 <template>
   <a
     :class="{
-      'text-primary-600': type === 'primary',
+      'text-primary': type === 'primary',
       'text-secondary-600': type === 'secondary',
       'text-success-600': type === 'success',
       'text-danger-600': type === 'danger',

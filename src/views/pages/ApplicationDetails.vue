@@ -169,7 +169,7 @@ const openApplicationGroupUpdateModal = () => {
       <!--   left side   -->
       <div>
         <div class="flex items-center gap-2">
-          <div class="flex overflow-hidden rounded-full border-2 border-secondary-300 text-base">
+          <div class="border-secondary flex overflow-hidden rounded-full border-2 text-base">
             <div class="flex items-center justify-center gap-2 py-1 pl-3 pr-2 font-medium">
               {{ applicationDetails.name }}
               <Badge v-if="applicationDetails.latestDeployment.status === 'live'" type="success">
@@ -197,7 +197,7 @@ const openApplicationGroupUpdateModal = () => {
             </div>
             <div
               @click="openApplicationGroupUpdateModal"
-              class="flex cursor-pointer items-center justify-center rounded-full bg-primary-600 px-3 py-1 text-sm font-medium italic text-white hover:bg-primary-500">
+              class="hover:bg-primary bg-primary flex cursor-pointer items-center justify-center rounded-full px-3 py-1 text-sm font-medium italic text-white">
               <span v-if="applicationDetails.group !== ''">{{ applicationDetails.group }}</span>
               <span v-else>no group</span>
               &nbsp;&nbsp;

@@ -60,7 +60,7 @@ const isLoginPage = computed(() => router.currentRoute.value.name === 'Login')
 }
 
 .scrollbox::-webkit-scrollbar-thumb {
-  @apply rounded-full bg-primary-500;
+  @apply bg-primary rounded-full;
 }
 
 .terminal {
@@ -83,7 +83,7 @@ const isLoginPage = computed(() => router.currentRoute.value.name === 'Login')
 }
 
 .xterm-viewport::-webkit-scrollbar-thumb {
-  @apply rounded-full bg-primary-500;
+  @apply bg-primary rounded-full;
 }
 
 .bg-color-1 {

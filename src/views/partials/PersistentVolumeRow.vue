@@ -127,7 +127,7 @@ const createBackup = () => {
           <div class="mt-4">
             <label class="block text-sm font-medium text-gray-700">Choose Backup Type</label>
             <select
-              class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+              class="focus:border-primary focus:ring-primary mt-2 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
               v-model="backupType">
               <option value="local">Local</option>
               <option value="s3">S3</option>

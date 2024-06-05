@@ -103,7 +103,7 @@ defineExpose({
                 id="name"
                 v-model="newGitCredential.name"
                 autocomplete="off"
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+                class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                 name="name"
                 placeholder="Name"
                 type="text" />
@@ -116,7 +116,7 @@ defineExpose({
               <select
                 id="git_credential"
                 v-model="newGitCredential.type"
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
+                class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm">
                 <option selected value="">No Credential</option>
                 <option value="http">HTTP</option>
                 <option value="ssh">SSH</option>
@@ -132,7 +132,7 @@ defineExpose({
                 v-model="newGitCredential.username"
                 @keydown="preventSpaceInput"
                 autocomplete="off"
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+                class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                 name="username"
                 placeholder="Git Username"
                 type="text" />
@@ -146,7 +146,7 @@ defineExpose({
                 id="password"
                 v-model="newGitCredential.password"
                 autocomplete="off"
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+                class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                 name="password"
                 placeholder="Git Password"
                 type="text" />
@@ -164,7 +164,7 @@ defineExpose({
               <textarea
                 id="ssh_private_key"
                 v-model="newGitCredential.sshPrivateKey"
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+                class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                 placeholder="ECDSA Private Key (In OpenSSH Format)"
                 type="text"
                 rows="5" />

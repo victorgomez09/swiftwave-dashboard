@@ -7,7 +7,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
     <div class="mx-auto w-full rounded-2xl bg-white">
       <Disclosure v-slot="{ open }" as="div" class="mt-2">
         <DisclosureButton
-          class="flex w-full justify-between rounded-lg bg-secondary-100 px-4 py-2 text-left text-sm font-medium text-secondary-900 hover:bg-secondary-200 focus:outline-none focus-visible:ring focus-visible:ring-secondary-500/75">
+          class="bg-secondary flex w-full justify-between rounded-lg px-4 py-2 text-left text-sm font-medium text-secondary-900 hover:bg-secondary-200 focus:outline-none focus-visible:ring focus-visible:ring-secondary-500/75">
           <span><slot name="title"></slot></span>
           <font-awesome-icon
             :class="{

@@ -412,7 +412,7 @@ const openChooseOtherDockerConfigurationModal = computed(
               id="git_credential"
               v-model="stateRef.gitCredentialID"
               @change="fetchGitBranches"
-              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
+              class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm">
               <option selected value="0">No Credential</option>
               <option v-for="credential in gitCredentials" :key="credential.id" :value="credential.id">
                 {{ credential.name }} [{{ credential.type }}]
@@ -421,9 +421,7 @@ const openChooseOtherDockerConfigurationModal = computed(
           </div>
           <p class="mt-2 flex items-center text-sm">
             Need to add credential for private repo ?
-            <a @click="openCreateGitCredentialModal" class="ml-1.5 cursor-pointer font-bold text-primary-600"
-              >Click Here</a
-            >
+            <a @click="openCreateGitCredentialModal" class="text-primary ml-1.5 cursor-pointer font-bold">Click Here</a>
           </p>
         </div>
 
@@ -436,7 +434,7 @@ const openChooseOtherDockerConfigurationModal = computed(
               v-model="stateRef.gitRepoUrl"
               v-debounce:1000ms="fetchGitBranches"
               autocomplete="off"
-              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+              class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
               name="name"
               placeholder="Enter Git Repository URL"
               type="text" />
@@ -455,7 +453,7 @@ const openChooseOtherDockerConfigurationModal = computed(
             <select
               id="git_credential"
               v-model="stateRef.gitBranch"
-              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
+              class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm">
               <option selected disabled value="">Select Branch</option>
               <option v-for="branch in availableGitBranches" :key="branch" :value="branch">
                 {{ branch }}
@@ -472,7 +470,7 @@ const openChooseOtherDockerConfigurationModal = computed(
               id="name"
               v-model="stateRef.codePath"
               autocomplete="off"
-              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+              class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
               name="name"
               placeholder="Absolute path of code (optional)"
               type="text" />
@@ -523,7 +521,7 @@ const openChooseOtherDockerConfigurationModal = computed(
               id="docker_image"
               v-model="stateRef.dockerImage"
               autocomplete="off"
-              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+              class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
               name="name"
               placeholder="Enter Docker Image URL"
               type="text" />
@@ -538,7 +536,7 @@ const openChooseOtherDockerConfigurationModal = computed(
             <select
               id="image_registry_credential"
               v-model="stateRef.imageRegistryCredentialID"
-              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
+              class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm">
               <option selected value="0">No Credential</option>
               <option v-for="credential in imageRegistryCredentials" :key="credential.id" :value="credential.id">
                 {{ credential.username }} - {{ credential.url }}
@@ -547,7 +545,7 @@ const openChooseOtherDockerConfigurationModal = computed(
           </div>
           <p class="mt-2 flex items-center text-sm">
             Need to add credential for private registry ?
-            <a @click="openCreateImageRegistryCredentialModal" class="ml-1.5 cursor-pointer font-bold text-primary-600"
+            <a @click="openCreateImageRegistryCredentialModal" class="text-primary ml-1.5 cursor-pointer font-bold"
               >Click Here</a
             >
           </p>
@@ -579,7 +577,7 @@ const openChooseOtherDockerConfigurationModal = computed(
       </FilledButton>
       <p class="mt-4 font-medium text-gray-700">
         🏂 Detected Service Name -
-        <span class="font-normal text-primary-600">{{ stateRef.detectedServiceName }}</span>
+        <span class="text-primary font-normal">{{ stateRef.detectedServiceName }}</span>
       </p>
       <FilledButton v-if="applicationSourceType !== 'image'" class="mt-4 w-full" @click="openDockerFileEditor"
         >View / Modify Dockerfile
@@ -594,7 +592,7 @@ const openChooseOtherDockerConfigurationModal = computed(
             id="docker_command"
             v-model="stateRef.command"
             autocomplete="off"
-            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+            class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
             name="docker_command"
             placeholder="Enter Docker Command"
             type="text" />

@@ -94,7 +94,7 @@ defineExpose({
               id="url"
               v-model="newImageRegistryCredential.url"
               autocomplete="off"
-              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+              class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
               name="url"
               placeholder="URL"
               type="text" />
@@ -109,7 +109,7 @@ defineExpose({
               v-model="newImageRegistryCredential.username"
               @keydown="preventSpaceInput"
               autocomplete="off"
-              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+              class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
               name="username"
               placeholder="Image Registry Username"
               type="text" />
@@ -123,7 +123,7 @@ defineExpose({
               id="password"
               v-model="newImageRegistryCredential.password"
               autocomplete="new-password"
-              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+              class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
               name="password"
               placeholder="Image Registry Password"
               type="text" />

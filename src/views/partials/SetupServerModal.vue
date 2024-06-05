@@ -363,7 +363,7 @@ onNetworkInterfacesOfServerResult((result) => {
                 </FilledButton>
               </div>
 
-              <div class="mt-2 rounded-md border border-secondary-200 p-2" v-if="info.isAutomatedDependenciesTriggered">
+              <div class="border-secondary mt-2 rounded-md border p-2" v-if="info.isAutomatedDependenciesTriggered">
                 <p class="italic">You can check logs of automated installation here</p>
                 <FilledButton class="mt-2" type="primary" :click="viewLogs">
                   <font-awesome-icon icon="fa-solid fa-file-lines" />&nbsp;&nbsp; View Logs of Server
@@ -383,7 +383,7 @@ onNetworkInterfacesOfServerResult((result) => {
               <label class="block text-sm font-medium text-gray-700" for="domain">Swarm Node Mode</label>
               <div class="mt-1 flex space-x-2">
                 <select
-                  class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+                  class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                   v-model="info.swarmMode">
                   <option value="manager">Manager</option>
                   <option value="worker">Worker</option>
@@ -402,7 +402,7 @@ onNetworkInterfacesOfServerResult((result) => {
               <div class="mt-1 flex flex-col">
                 <select
                   v-if="networkInterfacesOfServer.length > 1"
-                  class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+                  class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                   v-model="info.advertiseIP">
                   <option v-for="ip in networkInterfacesOfServer" :key="ip.ip" :value="ip.ip">
                     {{ ip.ip }} [{{ ip.name }}]

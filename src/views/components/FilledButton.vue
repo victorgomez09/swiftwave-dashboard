@@ -37,25 +37,18 @@ const isDisabled = computed(() => {
 <template>
   <button
     :class="{
-      'bg-primary-600 hover:bg-primary-600/80 focus-visible:outline-primary-600': type === 'primary',
-      'bg-secondary-600 hover:bg-secondary-600/80 focus-visible:outline-secondary-600': type === 'secondary',
-      'bg-success-600 hover:bg-success-600/80 focus-visible:outline-success-600': type === 'success',
-      'bg-warning-600 hover:bg-warning-600/80 focus-visible:outline-warning-600': type === 'warning',
-      'bg-danger-600 hover:bg-danger-600/80 focus-visible:outline-danger-600': type === 'danger',
-      'bg-info-600 hover:bg-info-600/80 focus-visible:outline-info-600': type === 'info',
-      'text-black-500 bg-secondary-100 font-medium hover:bg-secondary-200 focus-visible:outline-secondary-400':
-        type === 'ghost',
-      'font-semibold text-white': type !== 'ghost',
-      'cursor-not-allowed opacity-50': disabled,
-      'hover:bg-[type]-600/80': !disabled,
-      'cursor-progress': loading,
-      'py-2 text-sm': !slim,
-      'px-2 py-1 text-xs': slim,
+      'btn-primary': type === 'primary',
+      'btn-secondary': type === 'secondary',
+      'btn-success': type === 'success',
+      'btn-warning': type === 'warning',
+      'btn-danger': type === 'danger',
+      'btn-info': type === 'info',
+      'btn-ghost': type === 'ghost',
       'rounded-full': rounded,
       'rounded-md': !rounded
     }"
     :disabled="isDisabled"
-    class="flex items-center justify-center px-3 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+    class="btn"
     type="button"
     @click.stop="click">
     <!--    spinner -->

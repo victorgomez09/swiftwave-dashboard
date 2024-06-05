@@ -60,7 +60,7 @@ const environmentVariablesKeys = toRef(props, 'environmentVariablesKeys')
         <TableRow>
           <input
             :key="`name-${key}`"
-            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+            class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
             placeholder="Environment Variable Name"
             type="text"
             v-bind:value="environmentVariablesMap[key]?.name ?? ''"
@@ -69,7 +69,7 @@ const environmentVariablesKeys = toRef(props, 'environmentVariablesKeys')
         <TableRow>
           <input
             :key="`value-${key}`"
-            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+            class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
             placeholder="Environment Variable Value"
             type="text"
             v-bind:value="environmentVariablesMap[key]?.value ?? ''"

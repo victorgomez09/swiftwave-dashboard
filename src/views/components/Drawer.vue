@@ -91,7 +91,7 @@ defineProps({
 }
 
 .body::-webkit-scrollbar-thumb {
-  @apply rounded-full shadow-[inset_0_0_10px_10px] shadow-primary-500;
+  @apply shadow-primary rounded-full shadow-[inset_0_0_10px_10px];
   border: solid 3px transparent;
 }
 </style>

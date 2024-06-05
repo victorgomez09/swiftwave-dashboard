@@ -439,7 +439,7 @@ const openUrlInNewPage = (url) => {
       <!--  Header  -->
       <div class="flex w-full flex-row gap-5">
         <!--      Logo -->
-        <div class="h-14 w-14 rounded-md border border-primary-500 p-1.5">
+        <div class="border-primary h-14 w-14 rounded-md border p-1.5">
           <img :src="stackDetails.docs.logo_url" class="h-full w-full" :alt="stackDetails.docs.name" />
         </div>
         <!--    Title and description    -->
@@ -464,7 +464,7 @@ const openUrlInNewPage = (url) => {
     <!--  Installation Options  -->
     <div class="absolute bottom-0 right-0">
       <div class="flex flex-row items-center justify-center gap-2 pr-20">
-        <p class="font-semibold text-secondary-700">Looking for installation ?</p>
+        <p class="text-secondary font-semibold">Looking for installation ?</p>
         <FilledButton type="primary" :click="openInstallNowModal"> Install Now</FilledButton>
       </div>
     </div>
@@ -493,7 +493,7 @@ const openUrlInNewPage = (url) => {
             <div class="mt-1">
               <input
                 v-model="formStateRef.STACK_NAME"
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+                class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                 type="text"
                 @keydown="preventSpaceInput"
                 placeholder="Anything you like..." />
@@ -508,12 +508,12 @@ const openUrlInNewPage = (url) => {
               <input
                 v-if="stackDetails.docs.variables[key].type === 'text'"
                 v-model="formStateRef[key]"
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+                class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                 type="text" />
               <select
                 v-if="stackDetails.docs.variables[key].type === 'options'"
                 v-model="formStateRef[key]"
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
+                class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm">
                 <option v-for="op in stackDetails.docs.variables[key].options" :key="op.value" :value="op.value">
                   {{ op.title }}
                 </option>
@@ -533,7 +533,7 @@ const openUrlInNewPage = (url) => {
           </p>
           <p class="flex items-center text-sm">
             Need to add a domain ?
-            <a @click="openNewDomainModal" class="ml-1.5 cursor-pointer font-bold text-primary-600"
+            <a @click="openNewDomainModal" class="text-primary ml-1.5 cursor-pointer font-bold"
               >Click here to register domain</a
             >
           </p>
@@ -560,7 +560,7 @@ const openUrlInNewPage = (url) => {
                     <div class="mt-2 flex flex-row items-center gap-2">
                       <!--   Choose protocol   -->
                       <select
-                        class="block w-5/12 rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+                        class="focus:border-primary focus:ring-primary block w-5/12 rounded-md border-gray-300 shadow-sm sm:text-sm"
                         v-model="config.info.protocol"
                         @change="() => onChangeProtocol(serviceName, ingressRuleName)">
                         <option :value="protocol" v-for="protocol in config.info.availableProtocols">
@@ -571,7 +571,7 @@ const openUrlInNewPage = (url) => {
                       <select
                         v-if="config.info.protocol === 'http' || config.info.protocol === 'https'"
                         v-model="config.info.domainId"
-                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
+                        class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm">
                         <option value="0">Select a domain</option>
                         <option :value="domain.id" v-for="domain in domainList">
                           {{ domain.name }}
@@ -581,7 +581,7 @@ const openUrlInNewPage = (url) => {
                       <!--   Port -->
                       <input
                         v-model="config.info.port"
-                        class="block w-5/12 rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+                        class="focus:border-primary focus:ring-primary block w-5/12 rounded-md border-gray-300 shadow-sm sm:text-sm"
                         placeholder="Port"
                         type="number"
                         :readonly="!config.info.allowPortSelection" />

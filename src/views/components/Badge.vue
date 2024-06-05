@@ -14,7 +14,7 @@ defineProps({
   <span
     :class="{
       'bg-primary-100 text-primary-800': type === 'primary',
-      'bg-secondary-100 text-secondary-800': type === 'secondary',
+      'bg-secondary text-secondary-800': type === 'secondary',
       'bg-success-100 text-success-800': type === 'success',
       'bg-danger-100 text-danger-800': type === 'danger',
       'bg-warning-100 text-warning-800': type === 'warning'

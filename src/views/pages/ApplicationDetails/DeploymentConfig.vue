@@ -27,7 +27,7 @@ const applicationUpdater = newApplicationUpdater(router.currentRoute.value.param
       <input
         id="no_of_replicase"
         autocomplete="off"
-        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+        class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
         name="no_of_replicase"
         placeholder="No of Replicas"
         type="text"
@@ -46,7 +46,7 @@ const applicationUpdater = newApplicationUpdater(router.currentRoute.value.param
         <div class="mt-1">
           <input
             autocomplete="off"
-            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+            class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
             type="number"
             @change="(e) => applicationUpdater.onMemoryLimitChanged(parseInt(e.target.value) || 0)"
             v-model="applicationUpdater.deploymentConfigurationDetails.resourceLimit.memoryMb" />
@@ -59,7 +59,7 @@ const applicationUpdater = newApplicationUpdater(router.currentRoute.value.param
         <div class="mt-1">
           <input
             autocomplete="off"
-            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+            class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
             type="number"
             @change="(e) => applicationUpdater.onMemoryReservedChanged(parseInt(e.target.value) || 0)"
             v-model="applicationUpdater.deploymentConfigurationDetails.reservedResource.memoryMb" />

@@ -96,7 +96,7 @@ defineExpose({
                 v-model="newServerDetails.ip"
                 @keydown="preventSpaceInput"
                 autocomplete="off"
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+                class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                 placeholder=""
                 type="text" />
             </div>
@@ -110,7 +110,7 @@ defineExpose({
                 v-model="newServerDetails.ssh_port"
                 @keydown="preventSpaceInput"
                 autocomplete="off"
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+                class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                 placeholder=""
                 type="text" />
             </div>
@@ -124,7 +124,7 @@ defineExpose({
                 v-model="newServerDetails.user"
                 @keydown="preventSpaceInput"
                 autocomplete="off"
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+                class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                 placeholder=""
                 type="text" />
               <p class="pt-2 text-xs text-gray-800">

@@ -80,7 +80,7 @@ const callbackOnCreate = (e) => {
       'w-full': props.fullWidth
     }">
     <select
-      class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+      class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
       v-model="selectedPersistentVolume">
       <option value="" disabled selected>Select Persistent Volume</option>
       <option v-for="pv in persistentVolumes" :key="pv.id" :value="getValue(pv)">
@@ -89,7 +89,7 @@ const callbackOnCreate = (e) => {
     </select>
     <p class="ml-1 mt-2 flex items-center text-sm" v-if="showCreateLink">
       Need to create Volume ?
-      <a class="ml-1.5 cursor-pointer font-bold text-primary-600" @click="createPersistentVolume">Click here</a>
+      <a class="text-primary ml-1.5 cursor-pointer font-bold" @click="createPersistentVolume">Click here</a>
     </p>
     <CreatePersistentVolumeModal ref="createPersistentVolumeModalRef" :callback-on-create="callbackOnCreate" />
   </div>

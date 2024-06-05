@@ -90,7 +90,7 @@ const openStackFileForInstall = (stack) => {
     <div class="mb-2 flex w-full flex-row justify-center gap-3 p-2">
       <!--   Search Bar   -->
       <div
-        class="flex w-full overflow-hidden rounded-full border-2 border-primary-500 p-1 hover:ring-2 hover:ring-primary-300">
+        class="border-primary flex w-full overflow-hidden rounded-full border-2 p-1 hover:ring-2 hover:ring-primary-300">
         <input
           type="text"
           v-model="searchText"
@@ -121,7 +121,7 @@ const openStackFileForInstall = (stack) => {
       <p class="ml-4 mt-10 text-xl font-medium">No apps found</p>
       <p class="mt-3">
         If you think the app should be here, Raise a request in
-        <a href="https://github.com/swiftwave-org/app-store" target="_blank" class="font-semibold text-primary-600"
+        <a href="https://github.com/swiftwave-org/app-store" target="_blank" class="text-primary font-semibold"
           >Swiftwave App Store</a
         >.
       </p>
@@ -133,7 +133,7 @@ const openStackFileForInstall = (stack) => {
         @click="() => chooseApp(app)"
         v-for="app in appsShown"
         :key="app.id"
-        class="h-[180px] cursor-pointer rounded-xl border-2 border-secondary-400 p-2 hover:border-primary-500 hover:shadow-lg">
+        class="hover:border-primary border-secondary h-[180px] cursor-pointer rounded-xl border-2 p-2 hover:shadow-lg">
         <!--    Header    -->
         <div class="flex flex-row gap-3 border-b pb-2">
           <div class="h-12 w-12 rounded-md p-1.5">
@@ -180,6 +180,6 @@ const openStackFileForInstall = (stack) => {
 }
 
 .scrollbox::-webkit-scrollbar-thumb {
-  @apply rounded-full bg-primary-500;
+  @apply bg-primary rounded-full;
 }
 </style>

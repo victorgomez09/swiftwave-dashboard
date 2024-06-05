@@ -43,7 +43,7 @@ watch(selectedOption, (newValue) => {
 <template>
   <Combobox v-model="selectedOption">
     <div
-      class="relative w-full overflow-hidden rounded-md border border-gray-400 shadow transition-all delay-75 hover:border-2 hover:border-primary-500 focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
+      class="hover:border-primary focus:border-primary focus:ring-primary relative w-full overflow-hidden rounded-md border border-gray-400 shadow transition-all delay-75 hover:border-2 sm:text-sm">
       <ComboboxInput
         @change="query = $event.target.value"
         placeholder="Start typing to filter..."
@@ -54,12 +54,12 @@ watch(selectedOption, (newValue) => {
     </div>
 
     <ComboboxOptions
-      class="scrollbox mt-1 max-h-40 overflow-y-auto overflow-x-hidden rounded-md border-2 border-secondary-200 shadow">
+      class="scrollbox border-secondary mt-1 max-h-40 overflow-y-auto overflow-x-hidden rounded-md border-2 shadow">
       <ComboboxOption
         v-for="op in filteredOptions"
         :key="op"
         :value="op"
-        class="flex items-center justify-between px-3 py-2 text-sm font-medium hover:bg-primary-500 hover:text-white">
+        class="hover:bg-primary flex items-center justify-between px-3 py-2 text-sm font-medium hover:text-white">
         <span>{{ op }}</span>
         <font-awesome-icon icon="fa-solid fa-check" v-show="op === selectedOption" />
       </ComboboxOption>

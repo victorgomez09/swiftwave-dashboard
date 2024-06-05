@@ -33,7 +33,7 @@ defineProps({
         :name="argKey"
         :value="value"
         autocomplete="off"
-        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+        class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
         placeholder="{{ description }}"
         type="text"
         @input="(e) => updateBuildArg(e.target.value)" />

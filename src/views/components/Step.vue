@@ -31,7 +31,7 @@ defineProps({
     <div
       class="flex h-12 w-12 items-center justify-center rounded-xl border text-xl font-bold text-white shadow-md"
       :class="{
-        'border-primary-600 bg-primary-500': type === 'primary',
+        'bg-primary border-primary-600': type === 'primary',
         'border-secondary-600 bg-secondary-500': type === 'secondary',
         'border-success-600 bg-success-500': type === 'success',
         'border-danger-600 bg-danger-500': type === 'danger',

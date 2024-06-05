@@ -170,7 +170,7 @@ const openUrlInNewPage = (url) => {
 
 <template>
   <p class="text-xl font-semibold">
-    <font-awesome-icon icon="fa-solid fa-cubes-stacked" class="mr-2 text-primary-600" />
+    <font-awesome-icon icon="fa-solid fa-cubes-stacked" class="text-primary mr-2" />
     Deploy Stack
   </p>
   <section class="mx-auto mt-8 flex h-full w-full max-w-7xl space-x-8">
@@ -182,7 +182,7 @@ const openUrlInNewPage = (url) => {
           <input
             autocomplete="off"
             v-model="stateRef.stackName"
-            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+            class="focus:border-primary focus:ring-primary block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
             placeholder="Enter stack name"
             type="text" />
         </div>
